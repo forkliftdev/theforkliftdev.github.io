@@ -4,434 +4,666 @@
 <meta name="google-site-verification" content="ZvWrpq4CPv5_zTkDeVnhceM6iUaiJTT4nuTAiPQflu8" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TheForklift.dev — Word Games by Chris Webb</title>
+  <title>TheForklift.dev — FlexWord: One word game, eight ways to play</title>
+  <meta name="description" content="FlexWord is a word puzzle mega app with 8 modes — daily puzzles, sandbox play, bot battles, Shakespeare, kids mode and more. Live on Reddit, coming to iOS & Android." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --blue: #007ACC;
-      --amber: #FFC72C;
-      --bg: #0a0f14;
-      --surface: #111820;
-      --surface2: #1a2535;
-      --text: #e8edf2;
-      --muted: #7a8fa6;
-      --border: #1e2d40;
+      --bg: #050506;
+      --surface: #0e0e11;
+      --surface-2: #16161b;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --text: #f5f5f7;
+      --muted: #9b9ba4;
+      --faint: #6e6e78;
+
+      /* Mode accents (mirrors the app) */
+      --c-starter: #f5a623;
+      --c-word: #4c8dff;
+      --c-play: #34c77b;
+      --c-rate: #ef5da8;
+      --c-arena: #f05f57;
+      --c-hint: #2bbbb3;
+      --c-bard: #3ecf8e;
+      --c-kids: #8b7cf6;
+
+      --radius: 20px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'IBM Plex Mono', monospace;
-      min-height: 100vh;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
-    /* Grid background */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0,122,204,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,122,204,0.04) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: 0;
-    }
+    ::selection { background: rgba(76, 141, 255, 0.35); }
+
+    a { color: inherit; text-decoration: none; }
 
     .wrap {
-      max-width: 860px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 0 24px;
-      position: relative;
-      z-index: 1;
     }
 
-    /* ── HEADER ── */
-    header {
-      padding: 48px 0 0;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .logo-mark {
-      width: 52px;
-      height: 52px;
-      background: var(--blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%);
-      flex-shrink: 0;
-    }
-
-    .logo-mark span {
-      font-family: 'IBM Plex Mono', monospace;
-      font-weight: 600;
-      font-size: 11px;
-      color: #fff;
-      letter-spacing: -0.5px;
-    }
-
-    .site-name {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 22px;
-      color: var(--text);
-      letter-spacing: -0.5px;
-    }
-
-    .site-name span { color: var(--blue); }
-
-    /* ── HERO ── */
-    .hero {
-      padding: 72px 0 56px;
-    }
-
-    .hero-eyebrow {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 3px;
-      color: var(--amber);
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .hero-headline {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(36px, 6vw, 64px);
-      line-height: 1.05;
-      letter-spacing: -2px;
-      margin-bottom: 28px;
-      color: var(--text);
-    }
-
-    .hero-headline .accent {
-      color: var(--blue);
-      position: relative;
-      display: inline-block;
-    }
-
-    .hero-headline .accent::after {
-      content: '';
-      position: absolute;
-      bottom: 4px;
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
       left: 0;
       right: 0;
-      height: 3px;
-      background: var(--amber);
-    }
-
-    .hero-sub {
-      font-size: 15px;
-      line-height: 1.7;
-      color: var(--muted);
-      max-width: 560px;
-      margin-bottom: 36px;
-    }
-
-    .tagline {
-      display: inline-block;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--amber);
-      padding: 10px 18px;
-      font-size: 13px;
-      color: var(--amber);
-      letter-spacing: 0.5px;
-      font-weight: 600;
-    }
-
-    /* ── GAMES ── */
-    .section-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 3px;
-      color: var(--blue);
-      text-transform: uppercase;
-      margin-bottom: 24px;
-      padding-bottom: 12px;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(5, 5, 6, 0.7);
       border-bottom: 1px solid var(--border);
     }
 
-    section { padding: 48px 0; }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
 
-    .games-grid {
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--c-word), var(--c-play));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .nav-links a { transition: color 0.15s; }
+    .nav-links a:hover { color: var(--text); }
+
+    @media (max-width: 640px) {
+      .nav-links a:not(.btn) { display: none; }
+      .nav-inner { padding: 0 16px; }
+      .nav-links .btn { padding: 8px 16px; font-size: 13px; }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 9px 20px;
+      transition: transform 0.15s, background 0.15s, border-color 0.15s;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: #0a0a0c;
+    }
+    .btn-primary:hover { transform: translateY(-1px); background: #e9e9ee; }
+
+    .btn-ghost {
+      border-color: var(--border-strong);
+      color: var(--text);
+    }
+    .btn-ghost:hover { border-color: rgba(255, 255, 255, 0.3); }
+
+    .btn-lg { padding: 13px 28px; font-size: 15px; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 160px 0 96px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 600px;
+      background: radial-gradient(ellipse at center, rgba(76, 141, 255, 0.14), transparent 65%);
+      pointer-events: none;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border-strong);
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 999px;
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .pill .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--c-play);
+      box-shadow: 0 0 10px var(--c-play);
+    }
+
+    .pill strong { color: var(--text); font-weight: 600; }
+
+    h1 {
+      font-size: clamp(44px, 7.5vw, 84px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.02;
+      margin: 0 auto 24px;
+      max-width: 800px;
+    }
+
+    .grad {
+      background: linear-gradient(100deg, var(--c-word) 10%, var(--c-play) 50%, var(--c-hint) 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.2vw, 19px);
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 40px;
+      line-height: 1.65;
+    }
+
+    .hero-ctas {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 72px;
+    }
+
+    /* Hero board */
+    .board {
+      display: inline-grid;
+      grid-template-rows: repeat(3, auto);
+      gap: 8px;
+      padding: 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+    }
+
+    .board-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+
+    .tile {
+      width: clamp(44px, 9vw, 58px);
+      height: clamp(44px, 9vw, 58px);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: clamp(18px, 4vw, 24px);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      animation: tileIn 0.4s ease both;
+    }
+
+    .tile.g { background: rgba(52, 199, 123, 0.16); border-color: rgba(52, 199, 123, 0.45); color: var(--c-play); }
+    .tile.y { background: rgba(245, 166, 35, 0.14); border-color: rgba(245, 166, 35, 0.4); color: var(--c-starter); }
+
+    @keyframes tileIn {
+      from { opacity: 0; transform: rotateX(70deg) scale(0.9); }
+      to   { opacity: 1; transform: rotateX(0) scale(1); }
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 88px 0; }
+
+    .section-head { max-width: 640px; margin-bottom: 56px; }
+
+    .kicker {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: clamp(30px, 4.5vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .section-sub { color: var(--muted); font-size: 17px; }
+
+    .group-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--faint);
+      margin: 40px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .group-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .modes-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 16px;
     }
 
-    .game-card {
+    .mode-card {
+      --accent: var(--c-word);
+      position: relative;
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 24px;
-      transition: border-color 0.2s, transform 0.2s;
-      text-decoration: none;
-      color: inherit;
+      border-radius: var(--radius);
+      padding: 26px;
       display: block;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      overflow: hidden;
     }
 
-    .game-card:hover {
-      border-color: var(--blue);
-      transform: translateY(-2px);
+    .mode-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(420px 180px at 20% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
     }
 
-    .game-card-tag {
-      font-size: 10px;
+    .mode-card:hover {
+      transform: translateY(-3px);
+      border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+    }
+
+    .mode-card:hover::before { opacity: 1; }
+
+    .mode-chip {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 17px;
+      margin-bottom: 18px;
+      background: color-mix(in srgb, var(--accent) 14%, transparent);
+      color: var(--accent);
+      border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    }
+
+    .mode-name {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .mode-tag {
+      display: inline-block;
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 2px;
-      color: var(--amber);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
       margin-bottom: 10px;
     }
 
-    .game-card-name {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
-      margin-bottom: 8px;
-      color: var(--text);
-    }
-
-    .game-card-desc {
-      font-size: 12px;
+    .mode-desc {
+      font-size: 14px;
       line-height: 1.6;
       color: var(--muted);
     }
 
-    /* ── ABOUT ── */
-    .about-block {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-top: 3px solid var(--blue);
-      padding: 36px;
+    /* ── STORY ── */
+    .story {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    @media (max-width: 800px) {
+      .story { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .story p {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+      margin-bottom: 18px;
+    }
+
+    .story p strong { color: var(--text); font-weight: 600; }
+
+    .stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 32px;
-    }
-
-    @media (max-width: 600px) {
-      .about-block { grid-template-columns: 1fr; }
-    }
-
-    .about-block h3 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 20px;
-      margin-bottom: 14px;
-      color: var(--text);
-    }
-
-    .about-block p {
-      font-size: 13px;
-      line-height: 1.8;
-      color: var(--muted);
-    }
-
-    .about-block p + p { margin-top: 10px; }
-
-    .stat-row {
-      display: flex;
-      flex-direction: column;
       gap: 16px;
     }
 
-    .stat {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
     }
 
     .stat-num {
-      font-family: 'Syne', sans-serif;
+      font-size: 40px;
       font-weight: 800;
-      font-size: 32px;
-      color: var(--blue);
+      letter-spacing: -0.03em;
       line-height: 1;
+      margin-bottom: 10px;
+      background: linear-gradient(120deg, var(--c-word), var(--c-hint));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    .stat-label {
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.3;
-    }
+    .stat-label { font-size: 13px; color: var(--muted); line-height: 1.45; }
 
-    /* ── LINKS ── */
-    .links-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .link-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+    /* ── PLATFORMS ── */
+    .platforms {
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 10px 18px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text);
-      text-decoration: none;
-      transition: border-color 0.2s, color 0.2s;
+      border-radius: 28px;
+      padding: 64px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    .link-pill:hover {
-      border-color: var(--blue);
-      color: var(--blue);
+    .platforms::before {
+      content: '';
+      position: absolute;
+      bottom: -240px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 400px;
+      background: radial-gradient(ellipse at center, rgba(52, 199, 123, 0.12), transparent 65%);
+      pointer-events: none;
     }
 
-    .link-pill .dot {
-      width: 6px;
-      height: 6px;
-      background: var(--amber);
-      border-radius: 50%;
-      flex-shrink: 0;
+    .platforms h2 { max-width: 560px; margin-left: auto; margin-right: auto; }
+
+    .platforms .section-sub { max-width: 480px; margin: 0 auto 36px; }
+
+    .links-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: relative;
     }
 
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 32px 0;
+      padding: 40px 0;
+      margin-top: 48px;
+    }
+
+    .footer-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--faint);
     }
 
-    .footer-copy {
-      font-size: 12px;
-      color: var(--muted);
-    }
+    .footer-inner strong { color: var(--muted); font-weight: 600; }
 
-    .footer-copy strong { color: var(--text); }
-
-    .binary-badge {
-      font-size: 11px;
-      color: var(--blue);
-      letter-spacing: 2px;
-      opacity: 0.6;
-    }
-
-    /* ── ANIMATIONS ── */
+    /* ── REVEAL ── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .hero-eyebrow  { animation: fadeUp 0.5s ease both; }
-    .hero-headline { animation: fadeUp 0.5s 0.1s ease both; }
-    .hero-sub      { animation: fadeUp 0.5s 0.2s ease both; }
-    .tagline       { animation: fadeUp 0.5s 0.3s ease both; }
+    .hero .pill      { animation: fadeUp 0.5s 0.05s ease both; }
+    .hero h1         { animation: fadeUp 0.5s 0.12s ease both; }
+    .hero .hero-sub  { animation: fadeUp 0.5s 0.2s ease both; }
+    .hero .hero-ctas { animation: fadeUp 0.5s 0.28s ease both; }
+    .hero .board     { animation: fadeUp 0.6s 0.4s ease both; }
   </style>
 </head>
 <body>
 
-  <div class="wrap">
-
-    <header>
-      <div class="logo-mark"><span>111011</span></div>
-      <div class="site-name">The<span>Forklift</span>.dev</div>
-    </header>
-
-    <section class="hero">
-      <p class="hero-eyebrow">TheForklift.dev LLC</p>
-      <h1 class="hero-headline">
-        Word games built<br>
-        by a <span class="accent">forklift driver</span>
-      </h1>
-      <p class="hero-sub">
-        I'm Chris Webb — warehouse worker Mon–Wed, indie developer Thu–Sat.
-        I taught myself to code and spent 25 years carrying an idea before I finally shipped it.
-        This is what happens when you don't quit.
-      </p>
-      <div class="tagline">Taking the con out of lexicon.</div>
-    </section>
-
-    <section>
-      <p class="section-label">Games</p>
-      <div class="games-grid">
-        <a class="game-card" href="https://reddit.com/r/FlexWord" target="_blank">
-          <p class="game-card-tag">Daily · Reddit</p>
-          <p class="game-card-name">FlexWord</p>
-          <p class="game-card-desc">Daily word puzzles with 3–6 letter words, four difficulty levels, and up to 12 guess counts — 160 distinct game combinations.</p>
-        </a>
-        <a class="game-card" href="https://reddit.com/r/FlexWord" target="_blank">
-          <p class="game-card-tag">Free Play · Reddit</p>
-          <p class="game-card-name">FlexPlay</p>
-          <p class="game-card-desc">Play anytime. Pick your word length, difficulty, and guess count. No waiting for tomorrow's puzzle.</p>
-        </a>
-        <a class="game-card" href="https://reddit.com/r/FlexPlayCozy" target="_blank">
-          <p class="game-card-tag">Relaxed Mode · Reddit</p>
-          <p class="game-card-name">FlexPlay Cozy</p>
-          <p class="game-card-desc">Same great gameplay with a softer palette and easier difficulty settings. Wind down, not stress out.</p>
-        </a>
-        <a class="game-card" href="https://reddit.com/r/FlexBard" target="_blank">
-          <p class="game-card-tag">Shakespeare · Reddit</p>
-          <p class="game-card-name">FlexBard</p>
-          <p class="game-card-desc">Words drawn from the Shakespeare concordance. Daily definitions, quotes, and play citations. For the word nerds.</p>
-        </a>
-        <a class="game-card" href="https://reddit.com/r/FlexWord" target="_blank">
-          <p class="game-card-tag">PvP · Reddit</p>
-          <p class="game-card-name">FlexArena</p>
-          <p class="game-card-desc">Async head-to-head. Challenge another player to the same word and see who cracks it faster.</p>
-        </a>
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="#">
+        <span class="brand-mark">F</span>
+        TheForklift<span style="color:var(--faint)">.dev</span>
+      </a>
+      <div class="nav-links">
+        <a href="#modes">Modes</a>
+        <a href="#story">Story</a>
+        <a href="#community">Community</a>
+        <a class="btn btn-primary" href="https://reddit.com/r/FlexWord" target="_blank">Play on Reddit</a>
       </div>
-    </section>
+    </div>
+  </nav>
 
-    <section>
-      <p class="section-label">About</p>
-      <div class="about-block">
-        <div>
-          <h3>The story</h3>
-          <p>Age is just a data type. I'm 59 years old, I operate a forklift for a living three days a week, and I built a word game platform from scratch using YouTube, Stack Overflow, and a lot of stubbornness.</p>
-          <p>TheForklift.dev LLC develops and publishes word games for mobile and web. The FlexWord family launched on Reddit via Devvit in 2026 and is expanding to iOS and Android.</p>
+  <header class="hero wrap">
+    <div class="pill"><span class="dot"></span> Live on Reddit &middot; <strong>iOS &amp; Android coming 2026</strong></div>
+    <h1>One word game.<br /><span class="grad">Eight ways to play.</span></h1>
+    <p class="hero-sub">
+      FlexWord is a word puzzle mega app — daily puzzles, a fully customizable sandbox,
+      bot battles, Shakespeare, a kids mode, and a word-solving engine. All in one place.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary btn-lg" href="https://reddit.com/r/FlexWord" target="_blank">Play on Reddit</a>
+      <a class="btn btn-ghost btn-lg" href="#modes">Explore the modes</a>
+    </div>
+
+    <div class="board" aria-hidden="true">
+      <div class="board-row">
+        <span class="tile y" style="animation-delay:.5s">C</span>
+        <span class="tile" style="animation-delay:.56s">R</span>
+        <span class="tile" style="animation-delay:.62s">A</span>
+        <span class="tile" style="animation-delay:.68s">N</span>
+        <span class="tile g" style="animation-delay:.74s">E</span>
+      </div>
+      <div class="board-row">
+        <span class="tile g" style="animation-delay:.9s">F</span>
+        <span class="tile" style="animation-delay:.96s">L</span>
+        <span class="tile y" style="animation-delay:1.02s">O</span>
+        <span class="tile" style="animation-delay:1.08s">A</span>
+        <span class="tile y" style="animation-delay:1.14s">T</span>
+      </div>
+      <div class="board-row">
+        <span class="tile g" style="animation-delay:1.3s">F</span>
+        <span class="tile g" style="animation-delay:1.38s">O</span>
+        <span class="tile g" style="animation-delay:1.46s">R</span>
+        <span class="tile g" style="animation-delay:1.54s">T</span>
+        <span class="tile g" style="animation-delay:1.62s">E</span>
+      </div>
+    </div>
+  </header>
+
+  <section id="modes" class="wrap">
+    <div class="section-head">
+      <p class="kicker">The modes</p>
+      <h2>Every kind of word puzzle player, covered.</h2>
+      <p class="section-sub">From a three-guess daily sprint to a curated kids mode — pick your challenge.</p>
+    </div>
+
+    <p class="group-label">Main modes</p>
+    <div class="modes-grid">
+      <a class="mode-card" style="--accent: var(--c-starter)" href="https://reddit.com/r/FlexWord" target="_blank">
+        <span class="mode-chip">S</span>
+        <p class="mode-tag">Daily</p>
+        <p class="mode-name">Daily FlexStarter</p>
+        <p class="mode-desc">Craft the best opener. Choose a pack of 2–4 starting words, lock it in, read your clues — then solve the word in just 3 guesses.</p>
+      </a>
+      <a class="mode-card" style="--accent: var(--c-word)" href="https://reddit.com/r/FlexWord" target="_blank">
+        <span class="mode-chip">W</span>
+        <p class="mode-tag">Daily</p>
+        <p class="mode-name">Daily FlexWord</p>
+        <p class="mode-desc">The classic. One curated five-letter word a day, six guesses to crack it. Everyone plays the same puzzle.</p>
+      </a>
+      <a class="mode-card" style="--accent: var(--c-play)" href="https://reddit.com/r/FlexWord" target="_blank">
+        <span class="mode-chip">P</span>
+        <p class="mode-tag">Unlimited</p>
+        <p class="mode-name">FlexPlay</p>
+        <p class="mode-desc">The sandbox. Your rules, no limits: 3–6 letter words, your guess count, your difficulty — with inline hints powered by FlexHint.</p>
+      </a>
+    </div>
+
+    <p class="group-label">Supplements</p>
+    <div class="modes-grid">
+      <a class="mode-card" style="--accent: var(--c-rate)" href="https://reddit.com/r/FlexWord" target="_blank">
+        <span class="mode-chip">R</span>
+        <p class="mode-tag">Community</p>
+        <p class="mode-name">FlexRate</p>
+        <p class="mode-desc">Shape the game. Weigh in on the word list by rating the difficulty band of the words used across FlexWord.</p>
+      </a>
+      <a class="mode-card" style="--accent: var(--c-arena)" href="https://reddit.com/r/FlexWord" target="_blank">
+        <span class="mode-chip">A</span>
+        <p class="mode-tag">Versus</p>
+        <p class="mode-name">FlexArena</p>
+        <p class="mode-desc">Battle the bots. Race an algorithmically driven bot to solve the same word — fewest guesses wins.</p>
+      </a>
+    </div>
+
+    <p class="group-label">More ways to play</p>
+    <div class="modes-grid">
+      <a class="mode-card" style="--accent: var(--c-hint)" href="https://reddit.com/r/FlexWord" target="_blank">
+        <span class="mode-chip">H</span>
+        <p class="mode-tag">Solver</p>
+        <p class="mode-name">FlexHint</p>
+        <p class="mode-desc">A powerful word-solving engine. Feed it your clues and it reveals every viable solution — wired directly into FlexPlay.</p>
+      </a>
+      <a class="mode-card" style="--accent: var(--c-bard)" href="https://reddit.com/r/FlexBard" target="_blank">
+        <span class="mode-chip">B</span>
+        <p class="mode-tag">Literary</p>
+        <p class="mode-name">FlexBard</p>
+        <p class="mode-desc">From the Bard. Words of varying length drawn from Shakespeare's works — finish a game and see the word quoted in context.</p>
+      </a>
+      <a class="mode-card" style="--accent: var(--c-kids)" href="https://reddit.com/r/FlexWord" target="_blank">
+        <span class="mode-chip">K</span>
+        <p class="mode-tag">Family</p>
+        <p class="mode-name">FlexKids</p>
+        <p class="mode-desc">For young players. Three-letter words, 12 guesses, and a carefully curated word list built for beginning readers.</p>
+      </a>
+    </div>
+  </section>
+
+  <section id="story" class="wrap">
+    <div class="section-head">
+      <p class="kicker">The story</p>
+      <h2>Built by a forklift driver.</h2>
+    </div>
+    <div class="story">
+      <div>
+        <p><strong>Age is just a data type.</strong> I'm Chris Webb — warehouse worker Monday through Wednesday, indie developer Thursday through Saturday. I'm 59 years old, I operate a forklift for a living, and I built a word game platform from scratch using YouTube, Stack Overflow, and a lot of stubbornness.</p>
+        <p>I taught myself to code and spent 25 years carrying an idea before I finally shipped it. TheForklift.dev LLC develops and publishes word games for mobile and web. The FlexWord family launched on Reddit via Devvit in 2026 and is expanding to iOS and Android. This is what happens when you don't quit.</p>
+      </div>
+      <div class="stats">
+        <div class="stat-card">
+          <p class="stat-num">8</p>
+          <p class="stat-label">Game modes in the FlexWord family</p>
         </div>
-        <div class="stat-row">
-          <div class="stat">
-            <span class="stat-num">5+</span>
-            <span class="stat-label">Game modes<br>in the FlexWord family</span>
-          </div>
-          <div class="stat">
-            <span class="stat-num">160</span>
-            <span class="stat-label">Distinct game<br>combinations</span>
-          </div>
-          <div class="stat">
-            <span class="stat-num">25</span>
-            <span class="stat-label">Years from idea<br>to shipped product</span>
-          </div>
+        <div class="stat-card">
+          <p class="stat-num">160</p>
+          <p class="stat-label">Distinct game combinations</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-num">25</p>
+          <p class="stat-label">Years from idea to shipped product</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-num">2026</p>
+          <p class="stat-label">iOS &amp; Android launch</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section>
-      <p class="section-label">Find us</p>
+  <section id="community" class="wrap">
+    <div class="platforms">
+      <p class="kicker">Community</p>
+      <h2>Play today. Take it everywhere soon.</h2>
+      <p class="section-sub">FlexWord is live on Reddit right now, with native iOS and Android apps launching later this year.</p>
       <div class="links-row">
-        <a class="link-pill" href="https://reddit.com/r/FlexWord" target="_blank"><span class="dot"></span>r/FlexWord</a>
-        <a class="link-pill" href="https://reddit.com/r/FlexBard" target="_blank"><span class="dot"></span>r/FlexBard</a>
-        <a class="link-pill" href="https://reddit.com/r/FlexPlayCozy" target="_blank"><span class="dot"></span>r/FlexPlayCozy</a>
-        <a class="link-pill" href="https://github.com/forkliftdev/wordlist" target="_blank"><span class="dot"></span>GitHub</a>
-        <a class="link-pill" href="https://youtube.com/@theforkliftdev" target="_blank"><span class="dot"></span>YouTube</a>
-        <a class="link-pill" href="https://bsky.app/profile/forkliftdev.bsky.social" target="_blank"><span class="dot"></span>Bluesky</a>
+        <a class="btn btn-ghost" href="https://reddit.com/r/FlexWord" target="_blank">r/FlexWord</a>
+        <a class="btn btn-ghost" href="https://reddit.com/r/FlexBard" target="_blank">r/FlexBard</a>
+        <a class="btn btn-ghost" href="https://reddit.com/r/FlexPlayCozy" target="_blank">r/FlexPlayCozy</a>
+        <a class="btn btn-ghost" href="https://github.com/forkliftdev/wordlist" target="_blank">GitHub</a>
+        <a class="btn btn-ghost" href="https://youtube.com/@theforkliftdev" target="_blank">YouTube</a>
+        <a class="btn btn-ghost" href="https://bsky.app/profile/forkliftdev.bsky.social" target="_blank">Bluesky</a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer>
-      <p class="footer-copy"><strong>TheForklift.dev LLC</strong> &mdash; theforklift.dev</p>
-      <p class="binary-badge">111011</p>
-    </footer>
-
-  </div>
+  <footer>
+    <div class="wrap footer-inner">
+      <p><strong>TheForklift.dev LLC</strong> &mdash; Taking the con out of lexicon.</p>
+      <p>&copy; 2026 TheForklift.dev</p>
+    </div>
+  </footer>
 
 </body>
 </html>
