@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlexWord Support | TheForklift.dev</title>
+  <meta name="description" content="Get help with FlexWord: account, purchases, syncing, and reporting a word." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050506;
+      --surface: #0e0e11;
+      --surface-2: #16161b;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --text: #f5f5f7;
+      --muted: #9b9ba4;
+      --faint: #6e6e78;
+
+      /* Mode accents (mirrors the app) */
+      --c-starter: #f5a623;
+      --c-word: #4c8dff;
+      --c-play: #34c77b;
+      --c-rate: #ef5da8;
+      --c-arena: #f05f57;
+      --c-hint: #2bbbb3;
+      --c-bard: #3ecf8e;
+      --c-kids: #8b7cf6;
+
+      --radius: 20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: rgba(76, 141, 255, 0.35); }
+
+    a { color: inherit; text-decoration: none; }
+
+    article a, .callout a, .faq a {
+      color: var(--c-word);
+    }
+    article a:hover, .callout a:hover, .faq a:hover {
+      text-decoration: underline;
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── NAV (matches index.html) ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(5, 5, 6, 0.7);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--c-word), var(--c-play));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .nav-links a { transition: color 0.15s; text-decoration: none; }
+    .nav-links a:hover { color: var(--text); }
+
+    @media (max-width: 640px) {
+      .nav-links a:not(.btn) { display: none; }
+      .nav-inner { padding: 0 16px; }
+      .nav-links .btn { padding: 8px 16px; font-size: 13px; }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 9px 20px;
+      transition: transform 0.15s, background 0.15s, border-color 0.15s;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
+    }
+
+    .btn-primary { background: #fff; color: #0a0a0c; }
+    .btn-primary:hover { transform: translateY(-1px); background: #e9e9ee; text-decoration: none; }
+
+    .btn-ghost {
+      border-color: var(--border-strong);
+      color: var(--text);
+    }
+    .btn-ghost:hover { border-color: rgba(255, 255, 255, 0.3); text-decoration: none; }
+
+    /* ── DOC HEADER ── */
+    .doc-hero {
+      padding: 152px 0 40px;
+    }
+
+    .kicker {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(34px, 5.5vw, 52px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+      max-width: 700px;
+    }
+
+    .doc-meta {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 640px;
+    }
+
+    /* ── CONTACT CARD ── */
+    .contact-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 32px 0 8px;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .contact-card .chip {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 14px;
+      background: color-mix(in srgb, var(--c-word) 14%, transparent);
+      color: var(--c-word);
+      border: 1px solid color-mix(in srgb, var(--c-word) 25%, transparent);
+    }
+
+    .contact-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    /* ── DOC BODY ── */
+    .doc-body {
+      padding: 64px 0 96px;
+      max-width: 760px;
+    }
+
+    .section-label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin: 48px 0 20px;
+    }
+
+    .section-label:first-child { margin-top: 0; }
+
+    /* ── FAQ (native details/summary, no JS) ── */
+    .faq {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .faq details {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 22px;
+    }
+
+    .faq details[open] { border-color: var(--border-strong); }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15.5px;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .faq summary::-webkit-details-marker { display: none; }
+
+    .faq summary::after {
+      content: '+';
+      color: var(--faint);
+      font-size: 20px;
+      font-weight: 400;
+      flex: none;
+      transition: transform 0.2s ease;
+    }
+
+    .faq details[open] summary::after {
+      content: '\2212';
+    }
+
+    .faq p {
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.7;
+      margin-top: 12px;
+      max-width: 60ch;
+    }
+
+    .faq p strong { color: var(--text); font-weight: 600; }
+
+    /* ── COMMUNITY LINKS ── */
+    .links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* ── FOOTER (matches index.html) ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--faint);
+    }
+
+    .footer-inner strong { color: var(--muted); font-weight: 600; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--faint); }
+    .footer-links a:hover { color: var(--muted); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">F</span>
+        TheForklift<span style="color:var(--faint)">.dev</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html#modes">Modes</a>
+        <a href="index.html#story">Story</a>
+        <a href="support.html">Support</a>
+        <a href="privacy.html">Privacy</a>
+        <a class="btn btn-primary" href="https://reddit.com/r/FlexWord" target="_blank">Play on Reddit</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="doc-hero wrap">
+    <p class="kicker">Help</p>
+    <h1>Support</h1>
+    <p class="doc-meta">Questions, bugs, and account help for <strong style="color:var(--text)">FlexWord</strong>, published by TheForklift.dev LLC.</p>
+
+    <div class="contact-row">
+      <div class="contact-card">
+        <div class="chip">@</div>
+        <h3>Email us</h3>
+        <p>The fastest way to reach us. One person reads every message, so expect a reply within a few days rather than a bot.</p>
+        <a class="btn btn-ghost" href="mailto:support@theforklift.dev">support@theforklift.dev</a>
+      </div>
+      <div class="contact-card">
+        <div class="chip" style="background:color-mix(in srgb, var(--c-rate) 14%, transparent); color:var(--c-rate); border-color:color-mix(in srgb, var(--c-rate) 25%, transparent);">R</div>
+        <h3>Report a word</h3>
+        <p>Think a word felt wrong, too obscure, or shouldn't be in the list? Flag it right from the results screen, or email us the word and mode.</p>
+        <a class="btn btn-ghost" href="mailto:support@theforklift.dev?subject=Word%20report">Report by email</a>
+      </div>
+      <div class="contact-card">
+        <div class="chip" style="background:color-mix(in srgb, var(--c-play) 14%, transparent); color:var(--c-play); border-color:color-mix(in srgb, var(--c-play) 25%, transparent);">C</div>
+        <h3>Community</h3>
+        <p>FlexWord is live on Reddit, where a lot of quick questions get answered by other players before we even see them.</p>
+        <a class="btn btn-ghost" href="https://reddit.com/r/FlexWord" target="_blank">r/FlexWord</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap doc-body">
+    <p class="section-label">Frequently asked</p>
+    <div class="faq">
+      <details>
+        <summary>I bought Premium Pass, but the app still shows it as locked</summary>
+        <p>First, make sure you're signed in with the same account you purchased with. Then open <strong>Settings</strong> in the app and look for <strong>Restore Purchases</strong>. If it's still not showing after a restore, email <a href="mailto:support@theforklift.dev">support@theforklift.dev</a> with the email or Apple/Google account you purchased under, and we'll sort it out.</p>
+      </details>
+      <details>
+        <summary>How do I cancel or manage my subscription?</summary>
+        <p>FlexWord doesn't process payments directly. Subscriptions and purchases are managed through your device's app store: on iOS, go to <strong>Settings → [your name] → Subscriptions</strong>; on Android, open the <strong>Play Store → Payments &amp; subscriptions</strong>. Cancelling there stops future renewals; anything you've already unlocked stays unlocked until the period ends.</p>
+      </details>
+      <details>
+        <summary>My stats or streak disappeared</summary>
+        <p>Your history syncs to the cloud only while you're signed in and online. If you played as a guest and then created an account, or switched accounts, your old progress stays attached to the original account. Email us the rough dates and which modes you played, and we can usually trace what happened.</p>
+      </details>
+      <details>
+        <summary>Can I play on more than one device?</summary>
+        <p>Yes. Sign in with the same account on each device and your history, stats, and achievements sync automatically. Guest (anonymous) play does not sync across devices, since there's no account to link them.</p>
+      </details>
+      <details>
+        <summary>How do I delete my account and data?</summary>
+        <p>Email <a href="mailto:support@theforklift.dev?subject=PRIVACY%20REQUEST">support@theforklift.dev</a> with the subject line <strong>"PRIVACY REQUEST."</strong> We'll permanently delete your game history, stats, and achievements. See the <a href="privacy.html">Privacy Policy</a> for the full details on what's deleted and what's retained.</p>
+      </details>
+      <details>
+        <summary>The app crashed or a mode won't load</summary>
+        <p>Email <a href="mailto:support@theforklift.dev">support@theforklift.dev</a> with your device model, OS version, and which mode you were playing when it happened. A screenshot of anything on screen helps a lot.</p>
+      </details>
+      <details>
+        <summary>Is FlexWord safe for kids?</summary>
+        <p>The main FlexWord app isn't designed or marketed for children under 13. For younger players, we publish <strong>FlexKids</strong> separately: no ads, no analytics, and no cloud data collection.</p>
+      </details>
+    </div>
+
+    <p class="section-label">More ways to reach the community</p>
+    <div class="links-row">
+      <a class="btn btn-ghost" href="https://reddit.com/r/FlexWord" target="_blank">r/FlexWord</a>
+      <a class="btn btn-ghost" href="https://reddit.com/r/FlexBard" target="_blank">r/FlexBard</a>
+      <a class="btn btn-ghost" href="https://reddit.com/r/FlexPlayCozy" target="_blank">r/FlexPlayCozy</a>
+      <a class="btn btn-ghost" href="https://github.com/forkliftdev/wordlist" target="_blank">GitHub</a>
+      <a class="btn btn-ghost" href="https://bsky.app/profile/forkliftdev.bsky.social" target="_blank">Bluesky</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p><strong>TheForklift.dev LLC:</strong> Taking the con out of lexicon.</p>
+      <div class="footer-links">
+        <a href="support.html">Support</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+      <p>&copy; 2026 TheForklift.dev</p>
+    </div>
+  </footer>
+
+</body>
+</html>
