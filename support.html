@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FlexWord Support | TheForklift.dev</title>
   <meta name="description" content="Get help with FlexWord: account, purchases, syncing, and reporting a word." />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="img/favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="img/favicon-16.png" type="image/png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -99,13 +103,8 @@
       width: 30px;
       height: 30px;
       border-radius: 8px;
-      background: linear-gradient(135deg, var(--c-word), var(--c-play));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 800;
-      color: #fff;
+      display: block;
+      object-fit: cover;
     }
 
     .nav-links {
@@ -324,7 +323,7 @@
   <nav>
     <div class="nav-inner">
       <a class="brand" href="index.html">
-        <span class="brand-mark">F</span>
+        <img class="brand-mark" src="img/forklift-icon.png" alt="TheForklift.dev" width="30" height="30" />
         TheForklift<span style="color:var(--faint)">.dev</span>
       </a>
       <div class="nav-links">
