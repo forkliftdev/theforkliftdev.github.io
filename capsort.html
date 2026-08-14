@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CapSort: your screenshots, sorted. By you. | TheForklift.dev</title>
+  <meta name="description" content="CapSort sorts your iPhone screenshot backlog fast with one thumb gesture, shows you exactly what leaves your phone before it does, and turns cleanup into a habit you'll keep." />
+  <link rel="icon" href="img/capsort-icon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0F0F12;
+      --surface: #18181d;
+      --surface-2: #1f1f26;
+      --border: rgba(242, 240, 235, 0.08);
+      --border-strong: rgba(242, 240, 235, 0.15);
+      --text: #F2F0EB;
+      --muted: #a5a39d;
+      --faint: #75746f;
+
+      --accent: #6f93c4;
+      --success: #7ea888;
+      --danger: #c17c63;
+      --amber: #E8A838;
+
+      --radius: 20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; overflow-x: clip; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: rgba(111, 147, 196, 0.35); }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(15, 15, 18, 0.75);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1120px; margin: 0 auto; padding: 0 24px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; letter-spacing: -0.02em; }
+    .brand-mark { width: 30px; height: 30px; border-radius: 8px; display: block; object-fit: cover; }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 500; color: var(--muted); }
+    .nav-links a { transition: color 0.15s; }
+    .nav-links a:hover { color: var(--text); }
+
+    @media (max-width: 640px) {
+      .nav-links a:not(.btn) { display: none; }
+      .nav-inner { padding: 0 16px; }
+      .nav-links .btn { padding: 8px 16px; font-size: 13px; }
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; border-radius: 999px;
+      font-weight: 600; font-size: 14px; padding: 9px 20px;
+      transition: transform 0.15s, background 0.15s, border-color 0.15s;
+      cursor: pointer; border: 1px solid transparent;
+    }
+
+    .btn-primary { background: var(--amber); color: #211705; }
+    .btn-primary:hover { transform: translateY(-1px); background: #f2b64d; }
+
+    .btn-ghost { border-color: var(--border-strong); color: var(--text); }
+    .btn-ghost:hover { border-color: rgba(242, 240, 235, 0.3); }
+
+    .btn-lg { padding: 13px 28px; font-size: 15px; }
+
+    /* ── HERO ── */
+    .hero { padding: 160px 0 96px; text-align: center; position: relative; }
+
+    .hero::before {
+      content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse at center, rgba(111, 147, 196, 0.16), transparent 65%);
+      pointer-events: none;
+    }
+
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--border-strong); background: rgba(242, 240, 235, 0.03);
+      border-radius: 999px; padding: 7px 16px; font-size: 13px; font-weight: 500;
+      color: var(--muted); margin-bottom: 32px;
+    }
+
+    .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 10px var(--amber); }
+    .pill strong { color: var(--text); font-weight: 600; }
+
+    h1 {
+      font-size: clamp(40px, 6.8vw, 76px); font-weight: 800; letter-spacing: -0.04em;
+      line-height: 1.04; margin: 0 auto 24px; max-width: 780px;
+    }
+
+    .grad {
+      background: linear-gradient(100deg, var(--accent) 15%, var(--amber) 85%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.2vw, 19px); color: var(--muted); max-width: 620px;
+      margin: 0 auto 40px; line-height: 1.65;
+    }
+
+    .hero-ctas { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 72px; }
+
+    /* Hero mock — a stack of cards fanning into a bucket, echoing the app icon */
+    .mock {
+      display: inline-flex; align-items: center; justify-content: center; gap: 40px;
+      padding: 40px 56px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 24px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    }
+
+    .mock-stack { position: relative; width: 96px; height: 130px; }
+    .mock-card {
+      position: absolute; inset: 0; border-radius: 14px; border: 1px solid var(--border);
+      animation: fadeUp 0.6s ease both;
+    }
+    .mock-card.c1 { background: var(--surface-2); transform: rotate(-10deg) translate(-10px, 6px); }
+    .mock-card.c2 { background: var(--accent); transform: rotate(6deg) translate(8px, 2px); opacity: 0.85; }
+    .mock-card.c3 { background: var(--text); }
+
+    .mock-arrow { color: var(--faint); font-size: 22px; }
+
+    .mock-buckets { display: flex; flex-direction: column; gap: 8px; }
+    .mock-bucket {
+      width: 120px; padding: 10px 14px; border-radius: 10px; font-size: 13px; font-weight: 600;
+      background: var(--surface-2); border: 1px solid var(--border); color: var(--muted);
+    }
+    .mock-bucket.active { background: color-mix(in srgb, var(--amber) 16%, transparent); border-color: color-mix(in srgb, var(--amber) 40%, transparent); color: var(--amber); }
+
+    /* ── SECTIONS ── */
+    section { padding: 88px 0; }
+    .section-head { max-width: 640px; margin-bottom: 56px; }
+
+    .kicker {
+      font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--faint); margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: clamp(30px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em;
+      line-height: 1.1; margin-bottom: 16px;
+    }
+
+    .section-sub { color: var(--muted); font-size: 17px; }
+
+    .feature-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+    }
+
+    .feature-card {
+      --accent-c: var(--accent);
+      position: relative; background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 26px; overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .feature-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(420px 180px at 20% 0%, color-mix(in srgb, var(--accent-c) 10%, transparent), transparent 70%);
+      opacity: 0; transition: opacity 0.25s ease; pointer-events: none;
+    }
+
+    .feature-card:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent-c) 45%, transparent); }
+    .feature-card:hover::before { opacity: 1; }
+
+    .feature-chip {
+      width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center;
+      justify-content: center; font-weight: 700; font-size: 17px; margin-bottom: 18px;
+      background: color-mix(in srgb, var(--accent-c) 16%, transparent); color: var(--accent-c);
+      border: 1px solid color-mix(in srgb, var(--accent-c) 28%, transparent);
+    }
+
+    .feature-name { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .feature-desc { font-size: 14px; line-height: 1.65; color: var(--muted); }
+
+    /* ── STORY ── */
+    .story { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: center; }
+    @media (max-width: 800px) { .story { grid-template-columns: 1fr; gap: 40px; } }
+
+    .story p { color: var(--muted); font-size: 16px; line-height: 1.75; margin-bottom: 18px; }
+    .story p strong { color: var(--text); font-weight: 600; }
+
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; }
+    .stat-num {
+      font-size: 36px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; margin-bottom: 10px;
+      background: linear-gradient(120deg, var(--accent), var(--amber));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .stat-label { font-size: 13px; color: var(--muted); line-height: 1.45; }
+
+    /* ── LAUNCH ── */
+    .platforms {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 28px;
+      padding: 64px 48px; text-align: center; position: relative; overflow: hidden;
+    }
+    .platforms::before {
+      content: ''; position: absolute; bottom: -240px; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 400px;
+      background: radial-gradient(ellipse at center, rgba(232, 168, 56, 0.1), transparent 65%);
+      pointer-events: none;
+    }
+    .platforms h2 { max-width: 560px; margin-left: auto; margin-right: auto; }
+    .platforms .section-sub { max-width: 480px; margin: 0 auto 36px; }
+    .links-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; position: relative; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 48px; }
+    .footer-inner {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+      gap: 16px; font-size: 13px; color: var(--faint);
+    }
+    .footer-inner strong { color: var(--muted); font-weight: 600; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--faint); }
+    .footer-links a:hover { color: var(--muted); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    .hero .pill      { animation: fadeUp 0.5s 0.05s ease both; }
+    .hero h1         { animation: fadeUp 0.5s 0.12s ease both; }
+    .hero .hero-sub  { animation: fadeUp 0.5s 0.2s ease both; }
+    .hero .hero-ctas { animation: fadeUp 0.5s 0.28s ease both; }
+    .hero .mock      { animation: fadeUp 0.6s 0.4s ease both; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="img/forklift-icon.png" alt="TheForklift.dev" width="30" height="30" />
+        TheForklift<span style="color:var(--faint)">.dev</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#story">Story</a>
+        <a href="capsort-support.html">Support</a>
+        <a href="capsort-privacy.html">Privacy</a>
+        <a class="btn btn-primary" href="mailto:forklift2flutter@gmail.com?subject=CapSort%20launch">Get notified</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero wrap">
+    <div class="pill"><span class="dot"></span> iOS &middot; <strong>coming to the App Store</strong></div>
+    <h1>Your screenshots,<br /><span class="grad">sorted. By you.</span></h1>
+    <p class="hero-sub">
+      Your screenshot library isn't a photo library, it's a landfill. CapSort clears the
+      backlog fast with one thumb gesture, and shows you exactly what leaves your phone
+      before it does. No AI guessing, no cloud, no bloat.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary btn-lg" href="mailto:forklift2flutter@gmail.com?subject=CapSort%20launch">Get notified at launch</a>
+      <a class="btn btn-ghost btn-lg" href="#features">See how it works</a>
+    </div>
+
+    <div class="mock" aria-hidden="true">
+      <div class="mock-stack">
+        <div class="mock-card c1" style="animation-delay:.5s"></div>
+        <div class="mock-card c2" style="animation-delay:.6s"></div>
+        <div class="mock-card c3" style="animation-delay:.7s"></div>
+      </div>
+      <span class="mock-arrow">&rarr;</span>
+      <div class="mock-buckets">
+        <div class="mock-bucket">Receipts</div>
+        <div class="mock-bucket active">Inspo</div>
+        <div class="mock-bucket">Dev</div>
+      </div>
+    </div>
+  </header>
+
+  <section id="features" class="wrap">
+    <div class="section-head">
+      <p class="kicker">How it works</p>
+      <h2>Two gestures. Nothing else to learn.</h2>
+      <p class="section-sub">Long-press and drag to sort fast. Double-tap when a screenshot needs work first. Both end at the same bucket.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card" style="--accent-c: var(--accent)">
+        <span class="feature-chip">↳</span>
+        <p class="feature-name">Screenshots only</p>
+        <p class="feature-desc">CapSort reads Apple's screenshots collection, never your full camera roll. It's not a general photo organizer, and that's the point.</p>
+      </div>
+      <div class="feature-card" style="--accent-c: var(--amber)">
+        <span class="feature-chip">✓</span>
+        <p class="feature-name">Verified Export Preview</p>
+        <p class="feature-desc">iOS crop has leaked uncropped originals into Slack for years. Before anything leaves your phone, CapSort shows you the final image and confirms the crop actually committed.</p>
+      </div>
+      <div class="feature-card" style="--accent-c: var(--accent)">
+        <span class="feature-chip">◎</span>
+        <p class="feature-name">Metadata scrubbing you can see</p>
+        <p class="feature-desc">A mini map shows the exact GPS pin buried in a screenshot's metadata, then strips it, along with timestamp and device info, on export.</p>
+      </div>
+      <div class="feature-card" style="--accent-c: var(--amber)">
+        <span class="feature-chip">◆</span>
+        <p class="feature-name">Streaks, not spreadsheets</p>
+        <p class="feature-desc">Daily goals, milestone celebrations, and a real backlog-to-zero projection, all from what you've actually sorted, not an algorithm's guess.</p>
+      </div>
+      <div class="feature-card" style="--accent-c: var(--accent)">
+        <span class="feature-chip">⌗</span>
+        <p class="feature-name">Your own buckets</p>
+        <p class="feature-desc">Name your own folders and drag straight into them. No auto-categorization to second-guess, no AI deciding what a screenshot "is."</p>
+      </div>
+      <div class="feature-card" style="--accent-c: var(--amber)">
+        <span class="feature-chip">⏳</span>
+        <p class="feature-name">One trash dialog, not one per photo</p>
+        <p class="feature-desc">Deletions queue locally during a sort session. One confirmation empties the whole batch, instead of interrupting you after every swipe.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="story" class="wrap">
+    <div class="section-head">
+      <p class="kicker">Why it exists</p>
+      <h2>Not another AI cleanup tool.</h2>
+    </div>
+    <div class="story">
+      <div>
+        <p><strong>The problem isn't finding a screenshot, it's the pile.</strong> Receipts, recipes, code snippets, and inspiration all stack up with no plan to deal with them. Most people's answer is to ignore it until the storage warning shows up.</p>
+        <p>CapSort skips the AI-organizer pitch on purpose. Auto-categorization means second-guessing a model's judgment call on every photo. A long-press-and-drag gesture means you decide, once, per screenshot, and move on. Most backlogs clear in minutes.</p>
+        <p>The trust problem is the sharper one: iOS's crop tool has shipped uncropped originals to Slack, clipboard, and shares by accident, multiple iOS versions running. CapSort's Verified Export Preview is the screen Apple has never built, because building it would mean admitting the OS needs it.</p>
+      </div>
+      <div class="stats">
+        <div class="stat-card">
+          <p class="stat-num">2</p>
+          <p class="stat-label">Gestures to learn: long-press to sort, double-tap to transform</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-num">3</p>
+          <p class="stat-label">Metadata fields stripped on export: GPS, timestamp, device</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-num">0</p>
+          <p class="stat-label">Servers. Sorting and scrubbing happen entirely on-device</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-num">8</p>
+          <p class="stat-label">Sortable buckets, named by you, not suggested by AI</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="launch" class="wrap">
+    <div class="platforms">
+      <p class="kicker">Launch</p>
+      <h2>Heading to the App Store.</h2>
+      <p class="section-sub">CapSort is in submission now. Get an email the day it's live, or read what it does with your data first.</p>
+      <div class="links-row">
+        <a class="btn btn-primary" href="mailto:forklift2flutter@gmail.com?subject=CapSort%20launch">Get notified</a>
+        <a class="btn btn-ghost" href="capsort-support.html">Support</a>
+        <a class="btn btn-ghost" href="capsort-privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p><strong>TheForklift.dev LLC:</strong> Your screenshots, sorted. By you.</p>
+      <div class="footer-links">
+        <a href="capsort-support.html">Support</a>
+        <a href="capsort-privacy.html">Privacy</a>
+      </div>
+      <p>&copy; 2026 TheForklift.dev</p>
+    </div>
+  </footer>
+
+</body>
+</html>

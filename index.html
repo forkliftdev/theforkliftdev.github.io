@@ -4,8 +4,8 @@
 <meta name="google-site-verification" content="ZvWrpq4CPv5_zTkDeVnhceM6iUaiJTT4nuTAiPQflu8" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TheForklift.dev: FlexWord, one word game, eight ways to play</title>
-  <meta name="description" content="FlexWord is a word puzzle mega app with 8 modes: daily puzzles, sandbox play, bot battles, Shakespeare, kids mode and more. Live on Reddit, coming to iOS & Android." />
+  <title>TheForklift.dev — apps built by one person</title>
+  <meta name="description" content="TheForklift.dev LLC: FlexWord, a word puzzle mega app, and CapSort, a screenshot-sorting app for iOS. Built by a forklift driver turned indie developer." />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="img/favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="img/favicon-16.png" type="image/png" sizes="16x16" />
@@ -24,15 +24,11 @@
       --muted: #9b9ba4;
       --faint: #6e6e78;
 
-      /* Mode accents (mirrors the app) */
-      --c-starter: #f5a623;
-      --c-word: #4c8dff;
-      --c-play: #34c77b;
-      --c-rate: #ef5da8;
-      --c-arena: #f05f57;
-      --c-hint: #2bbbb3;
-      --c-bard: #3ecf8e;
-      --c-kids: #8b7cf6;
+      /* App identity accents */
+      --c-flexword: #4c8dff;
+      --c-flexword-2: #34c77b;
+      --c-capsort: #6f93c4;
+      --c-capsort-2: #e8a838;
 
       --radius: 20px;
     }
@@ -55,18 +51,12 @@
 
     a { color: inherit; text-decoration: none; }
 
-    .wrap {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
     /* ── NAV ── */
     nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
@@ -94,23 +84,9 @@
       letter-spacing: -0.02em;
     }
 
-    .brand-mark {
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
-      display: block;
-      object-fit: cover;
-    }
+    .brand-mark { width: 30px; height: 30px; border-radius: 8px; display: block; object-fit: cover; }
 
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--muted);
-    }
-
+    .nav-links { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 500; color: var(--muted); }
     .nav-links a { transition: color 0.15s; }
     .nav-links a:hover { color: var(--text); }
 
@@ -133,26 +109,16 @@
       border: 1px solid transparent;
     }
 
-    .btn-primary {
-      background: #fff;
-      color: #0a0a0c;
-    }
+    .btn-primary { background: #fff; color: #0a0a0c; }
     .btn-primary:hover { transform: translateY(-1px); background: #e9e9ee; }
 
-    .btn-ghost {
-      border-color: var(--border-strong);
-      color: var(--text);
-    }
+    .btn-ghost { border-color: var(--border-strong); color: var(--text); }
     .btn-ghost:hover { border-color: rgba(255, 255, 255, 0.3); }
 
     .btn-lg { padding: 13px 28px; font-size: 15px; }
 
     /* ── HERO ── */
-    .hero {
-      padding: 160px 0 96px;
-      text-align: center;
-      position: relative;
-    }
+    .hero { padding: 160px 0 88px; position: relative; }
 
     .hero::before {
       content: '';
@@ -162,7 +128,7 @@
       transform: translateX(-50%);
       width: 900px;
       height: 600px;
-      background: radial-gradient(ellipse at center, rgba(76, 141, 255, 0.14), transparent 65%);
+      background: radial-gradient(ellipse at center, rgba(76, 141, 255, 0.12), transparent 65%);
       pointer-events: none;
     }
 
@@ -180,89 +146,29 @@
       margin-bottom: 32px;
     }
 
-    .pill .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--c-play);
-      box-shadow: 0 0 10px var(--c-play);
-    }
-
+    .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--c-flexword-2); box-shadow: 0 0 10px var(--c-flexword-2); }
     .pill strong { color: var(--text); font-weight: 600; }
 
     h1 {
-      font-size: clamp(44px, 7.5vw, 84px);
+      font-size: clamp(40px, 6.5vw, 68px);
       font-weight: 800;
       letter-spacing: -0.04em;
-      line-height: 1.02;
-      margin: 0 auto 24px;
-      max-width: 800px;
-    }
-
-    .grad {
-      background: linear-gradient(100deg, var(--c-word) 10%, var(--c-play) 50%, var(--c-hint) 90%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      line-height: 1.04;
+      margin: 0 0 24px;
+      max-width: 780px;
     }
 
     .hero-sub {
-      font-size: clamp(16px, 2.2vw, 19px);
+      font-size: clamp(16px, 2.1vw, 19px);
       color: var(--muted);
-      max-width: 620px;
-      margin: 0 auto 40px;
+      max-width: 600px;
       line-height: 1.65;
     }
 
-    .hero-ctas {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 72px;
-    }
-
-    /* Hero board */
-    .board {
-      display: inline-grid;
-      grid-template-rows: repeat(3, auto);
-      gap: 8px;
-      padding: 28px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
-    }
-
-    .board-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
-
-    .tile {
-      width: clamp(44px, 9vw, 58px);
-      height: clamp(44px, 9vw, 58px);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: clamp(18px, 4vw, 24px);
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      color: var(--text);
-      animation: tileIn 0.4s ease both;
-    }
-
-    .tile.g { background: rgba(52, 199, 123, 0.16); border-color: rgba(52, 199, 123, 0.45); color: var(--c-play); }
-    .tile.y { background: rgba(245, 166, 35, 0.14); border-color: rgba(245, 166, 35, 0.4); color: var(--c-starter); }
-
-    @keyframes tileIn {
-      from { opacity: 0; transform: rotateX(70deg) scale(0.9); }
-      to   { opacity: 1; transform: rotateX(0) scale(1); }
-    }
-
     /* ── SECTIONS ── */
-    section { padding: 88px 0; }
+    section { padding: 72px 0; }
 
-    .section-head { max-width: 640px; margin-bottom: 56px; }
+    .section-head { max-width: 640px; margin-bottom: 44px; }
 
     .kicker {
       font-size: 13px;
@@ -274,7 +180,7 @@
     }
 
     h2 {
-      font-size: clamp(30px, 4.5vw, 44px);
+      font-size: clamp(28px, 4.2vw, 40px);
       font-weight: 700;
       letter-spacing: -0.03em;
       line-height: 1.1;
@@ -283,129 +189,87 @@
 
     .section-sub { color: var(--muted); font-size: 17px; }
 
-    .group-label {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--faint);
-      margin: 40px 0 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .group-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .modes-grid {
+    /* ── APP CARDS ── */
+    .apps-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
     }
 
-    .mode-card {
-      --accent: var(--c-word);
+    .app-card {
+      --accent: var(--c-flexword);
       position: relative;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 26px;
-      display: block;
-      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      border-radius: 28px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, border-color 0.2s ease;
       overflow: hidden;
     }
 
-    .mode-card::before {
+    .app-card::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(420px 180px at 20% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%);
+      background: radial-gradient(520px 220px at 15% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%);
       opacity: 0;
       transition: opacity 0.25s ease;
       pointer-events: none;
     }
 
-    .mode-card:hover {
-      transform: translateY(-3px);
-      border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+    .app-card:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+    .app-card:hover::before { opacity: 1; }
+
+    .app-card-top { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+
+    .app-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: block;
+      object-fit: cover;
+      border: 1px solid var(--border);
     }
 
-    .mode-card:hover::before { opacity: 1; }
-
-    .mode-chip {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      display: flex;
+    .app-status {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 17px;
-      margin-bottom: 18px;
-      background: color-mix(in srgb, var(--accent) 14%, transparent);
-      color: var(--accent);
-      border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
-    }
-
-    .mode-name {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 6px;
-    }
-
-    .mode-tag {
-      display: inline-block;
-      font-size: 11px;
+      gap: 6px;
+      font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--accent);
+      color: color-mix(in srgb, var(--accent) 80%, white 20%);
+      background: color-mix(in srgb, var(--accent) 14%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+      padding: 4px 11px;
+      border-radius: 999px;
+    }
+
+    .app-status .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    .app-name {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
       margin-bottom: 10px;
     }
 
-    .mode-desc {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--muted);
-    }
+    .app-tagline { color: var(--muted); font-size: 15px; line-height: 1.65; margin-bottom: 24px; flex: 1; }
+
+    .app-card-links { display: flex; gap: 10px; flex-wrap: wrap; position: relative; }
 
     /* ── STORY ── */
-    .story {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
+    .story { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: center; }
 
-    @media (max-width: 800px) {
-      .story { grid-template-columns: 1fr; gap: 40px; }
-    }
+    @media (max-width: 800px) { .story { grid-template-columns: 1fr; gap: 40px; } }
 
-    .story p {
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.75;
-      margin-bottom: 18px;
-    }
-
+    .story p { color: var(--muted); font-size: 16px; line-height: 1.75; margin-bottom: 18px; }
     .story p strong { color: var(--text); font-weight: 600; }
 
-    .stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
-    .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px 24px;
-    }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; }
 
     .stat-num {
       font-size: 40px;
@@ -413,7 +277,7 @@
       letter-spacing: -0.03em;
       line-height: 1;
       margin-bottom: 10px;
-      background: linear-gradient(120deg, var(--c-word), var(--c-hint));
+      background: linear-gradient(120deg, var(--c-flexword), var(--c-capsort-2));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -421,196 +285,90 @@
 
     .stat-label { font-size: 13px; color: var(--muted); line-height: 1.45; }
 
-    /* ── PLATFORMS ── */
-    .platforms {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      padding: 64px 48px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .platforms::before {
-      content: '';
-      position: absolute;
-      bottom: -240px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 700px;
-      height: 400px;
-      background: radial-gradient(ellipse at center, rgba(52, 199, 123, 0.12), transparent 65%);
-      pointer-events: none;
-    }
-
-    .platforms h2 { max-width: 560px; margin-left: auto; margin-right: auto; }
-
-    .platforms .section-sub { max-width: 480px; margin: 0 auto 36px; }
-
-    .links-row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      position: relative;
-    }
-
     /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 0;
-      margin-top: 48px;
-    }
+    footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 24px; }
 
     .footer-inner {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 24px;
       font-size: 13px;
       color: var(--faint);
     }
 
     .footer-inner strong { color: var(--muted); font-weight: 600; }
-    .footer-links { display: flex; gap: 20px; }
+
+    .footer-apps { display: flex; gap: 40px; flex-wrap: wrap; }
+    .footer-app-group p { font-weight: 600; color: var(--muted); margin-bottom: 8px; font-size: 13px; }
+    .footer-app-group .footer-links { display: flex; flex-direction: column; gap: 6px; }
     .footer-links a { color: var(--faint); }
     .footer-links a:hover { color: var(--muted); }
 
     /* ── REVEAL ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero .pill      { animation: fadeUp 0.5s 0.05s ease both; }
-    .hero h1         { animation: fadeUp 0.5s 0.12s ease both; }
-    .hero .hero-sub  { animation: fadeUp 0.5s 0.2s ease both; }
-    .hero .hero-ctas { animation: fadeUp 0.5s 0.28s ease both; }
-    .hero .board     { animation: fadeUp 0.6s 0.4s ease both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    .hero .pill     { animation: fadeUp 0.5s 0.05s ease both; }
+    .hero h1        { animation: fadeUp 0.5s 0.12s ease both; }
+    .hero .hero-sub { animation: fadeUp 0.5s 0.2s ease both; }
   </style>
 </head>
 <body>
 
   <nav>
     <div class="nav-inner">
-      <a class="brand" href="#">
+      <a class="brand" href="index.html">
         <img class="brand-mark" src="img/forklift-icon.png" alt="TheForklift.dev" width="30" height="30" />
         TheForklift<span style="color:var(--faint)">.dev</span>
       </a>
       <div class="nav-links">
-        <a href="#modes">Modes</a>
+        <a href="#apps">Apps</a>
         <a href="#story">Story</a>
-        <a href="#community">Community</a>
-        <a href="support.html">Support</a>
-        <a href="privacy.html">Privacy</a>
-        <a class="btn btn-primary" href="https://reddit.com/r/FlexWord" target="_blank">Play on Reddit</a>
+        <a class="btn btn-primary" href="mailto:forklift2flutter@gmail.com">Get in touch</a>
       </div>
     </div>
   </nav>
 
   <header class="hero wrap">
-    <div class="pill"><span class="dot"></span> Live on Reddit &middot; <strong>iOS &amp; Android coming 2026</strong></div>
-    <h1>One word game.<br /><span class="grad">Eight ways to play.</span></h1>
+    <div class="pill"><span class="dot"></span> Two apps, <strong>one developer</strong></div>
+    <h1>Small, focused apps.<br />Built to actually finish.</h1>
     <p class="hero-sub">
-      FlexWord is a word puzzle mega app. We have daily puzzles, a fully customizable sandbox,
-      bot battles, Shakespeare, a kids mode, and a word-solving engine. All in one place.
+      TheForklift.dev LLC makes deliberately narrow tools: a word game platform with
+      eight ways to play, and a screenshot triage app that does one job well. No bloat,
+      no growth-hacked feature creep — just things worth shipping.
     </p>
-    <div class="hero-ctas">
-      <a class="btn btn-primary btn-lg" href="https://reddit.com/r/FlexWord" target="_blank">Play on Reddit</a>
-      <a class="btn btn-ghost btn-lg" href="#modes">Explore the modes</a>
-    </div>
-
-    <div class="board" aria-hidden="true">
-      <div class="board-row">
-        <span class="tile y" style="animation-delay:.5s">C</span>
-        <span class="tile" style="animation-delay:.56s">R</span>
-        <span class="tile" style="animation-delay:.62s">A</span>
-        <span class="tile" style="animation-delay:.68s">N</span>
-        <span class="tile g" style="animation-delay:.74s">E</span>
-      </div>
-      <div class="board-row">
-        <span class="tile g" style="animation-delay:.9s">F</span>
-        <span class="tile" style="animation-delay:.96s">L</span>
-        <span class="tile y" style="animation-delay:1.02s">O</span>
-        <span class="tile" style="animation-delay:1.08s">A</span>
-        <span class="tile y" style="animation-delay:1.14s">T</span>
-      </div>
-      <div class="board-row">
-        <span class="tile g" style="animation-delay:1.3s">F</span>
-        <span class="tile g" style="animation-delay:1.38s">O</span>
-        <span class="tile g" style="animation-delay:1.46s">R</span>
-        <span class="tile g" style="animation-delay:1.54s">T</span>
-        <span class="tile g" style="animation-delay:1.62s">E</span>
-      </div>
-    </div>
   </header>
 
-  <section id="modes" class="wrap">
+  <section id="apps" class="wrap">
     <div class="section-head">
-      <p class="kicker">The modes</p>
-      <h2>Every kind of word puzzle player, covered.</h2>
-      <p class="section-sub">From a three-guess daily sprint to a curated kids mode, pick your challenge.</p>
+      <p class="kicker">The apps</p>
+      <h2>Pick one.</h2>
+      <p class="section-sub">Each has its own page, its own support line, and its own privacy policy.</p>
     </div>
 
-    <p class="group-label">Main modes</p>
-    <div class="modes-grid">
-      <a class="mode-card" style="--accent: var(--c-starter)" href="https://reddit.com/r/FlexWord" target="_blank">
-        <span class="mode-chip">S</span>
-        <p class="mode-tag">Daily</p>
-        <p class="mode-name">Daily FlexStarter</p>
-        <p class="mode-desc">Craft the best opener. Choose a pack of 2–4 starting words, lock it in, read your clues, then solve the word in just 3 guesses.</p>
+    <div class="apps-grid">
+      <a class="app-card" style="--accent: var(--c-flexword)" href="flexword.html">
+        <div class="app-card-top">
+          <img class="app-icon" src="img/forklift-icon.png" alt="FlexWord" />
+          <span class="app-status"><span class="dot"></span>Live on Reddit</span>
+        </div>
+        <p class="app-name">FlexWord</p>
+        <p class="app-tagline">One word game, eight ways to play: daily puzzles, an open sandbox, bot battles, a kids mode, and a Shakespeare spinoff. Live on Reddit now, iOS &amp; Android in review.</p>
+        <div class="app-card-links">
+          <span class="btn btn-ghost">See FlexWord →</span>
+        </div>
       </a>
-      <a class="mode-card" style="--accent: var(--c-word)" href="https://reddit.com/r/FlexWord" target="_blank">
-        <span class="mode-chip">W</span>
-        <p class="mode-tag">Daily</p>
-        <p class="mode-name">Daily FlexWord</p>
-        <p class="mode-desc">The classic. One curated five-letter word a day, six guesses to solve. Everyone plays the same puzzle.</p>
-      </a>
-      <a class="mode-card" style="--accent: var(--c-play)" href="https://reddit.com/r/FlexWord" target="_blank">
-        <span class="mode-chip">P</span>
-        <p class="mode-tag">Unlimited</p>
-        <p class="mode-name">FlexPlay</p>
-        <p class="mode-desc">The sandbox. Your rules, no limits: 3–6 letter words, your guess count, your difficulty, with inline hints powered by FlexHint.</p>
-      </a>
-    </div>
 
-    <p class="group-label">Supplements</p>
-    <div class="modes-grid">
-      <a class="mode-card" style="--accent: var(--c-rate)" href="https://reddit.com/r/FlexWord" target="_blank">
-        <span class="mode-chip">R</span>
-        <p class="mode-tag">Community</p>
-        <p class="mode-name">FlexRate</p>
-        <p class="mode-desc">Shape the game. Weigh in on the word list by rating the difficulty band of the words used across FlexWord.</p>
-      </a>
-      <a class="mode-card" style="--accent: var(--c-arena)" href="https://reddit.com/r/FlexWord" target="_blank">
-        <span class="mode-chip">A</span>
-        <p class="mode-tag">Versus</p>
-        <p class="mode-name">FlexArena</p>
-        <p class="mode-desc">Battle the bots. Race an algorithmically driven bot to solve the same word. Fewest guesses wins, of course.</p>
-      </a>
-    </div>
-
-    <p class="group-label">More ways to play</p>
-    <div class="modes-grid">
-      <a class="mode-card" style="--accent: var(--c-hint)" href="https://reddit.com/r/FlexWord" target="_blank">
-        <span class="mode-chip">H</span>
-        <p class="mode-tag">Solver</p>
-        <p class="mode-name">FlexHint</p>
-        <p class="mode-desc">A powerful word-solving engine. Feed it your clues and it reveals every viable solution. It's wired directly into FlexPlay, but not the other modes.</p>
-      </a>
-      <a class="mode-card" style="--accent: var(--c-bard)" href="https://reddit.com/r/FlexBard" target="_blank">
-        <span class="mode-chip">B</span>
-        <p class="mode-tag">Literary</p>
-        <p class="mode-name">FlexBard</p>
-        <p class="mode-desc">From the Bard. Words of varying length drawn from Shakespeare's works. Finish a game and see the word as he used it.</p>
-      </a>
-      <a class="mode-card" style="--accent: var(--c-kids)" href="https://reddit.com/r/FlexWord" target="_blank">
-        <span class="mode-chip">K</span>
-        <p class="mode-tag">Family</p>
-        <p class="mode-name">FlexKids</p>
-        <p class="mode-desc">For young players. Three-letter words, 12 guesses, and a carefully curated word list built for early learners.</p>
+      <a class="app-card" style="--accent: var(--c-capsort)" href="capsort.html">
+        <div class="app-card-top">
+          <img class="app-icon" src="img/capsort-icon.png" alt="CapSort" />
+          <span class="app-status"><span class="dot"></span>Coming to iOS</span>
+        </div>
+        <p class="app-name">CapSort</p>
+        <p class="app-tagline">Your screenshot library isn't a photo library, it's a landfill. CapSort sorts it fast with one thumb gesture, and shows you exactly what leaves your phone before it does.</p>
+        <div class="app-card-links">
+          <span class="btn btn-ghost">See CapSort →</span>
+        </div>
       </a>
     </div>
   </section>
@@ -622,54 +380,52 @@
     </div>
     <div class="story">
       <div>
-        <p><strong>Age is just a data type.</strong> I'm Chris Webb, a warehouse worker Monday through Wednesday, indie developer Thursday through Saturday. I'm 59 years old, I operate a forklift for a living, and I built a word game platform from scratch with a <i>little</i> help from AI.</p>
-        <p>I've had a game in my head for at least 25 years. This is not that game, but for the past several years building a Wordle clone has been a popular training exercize for people learning to program.</p>
-        <p>With FlexWord, I take it beyond clone. Let's face it, if the New York Times bought the plans for the Model T from Henry Ford back in the day, we would all be driving black, boxy cars that we have to hand-crank to start.</p>
-        <p>TheForklift.dev LLC develops and publishes word games for mobile and web. The FlexWord family launched on Reddit via Devvit in 2026 and is expanding to iOS and Android. This is what happens when you don't quit.</p>
+        <p><strong>Age is just a data type.</strong> I'm Chris Webb, a warehouse worker Monday through Wednesday, indie developer Thursday through Saturday. I'm 59 years old, I operate a forklift for a living, and I build software with a <i>little</i> help from AI.</p>
+        <p>FlexWord started as a Wordle clone — the classic first project — and grew into an eight-mode word game platform because stopping at "clone" felt like a waste of the idea.</p>
+        <p>CapSort came from a much smaller irritation: a screenshot library with thousands of unsorted images and no fast way to deal with them. Apple's own crop tools are unreliable enough that people have leaked uncropped screenshots into Slack by accident — CapSort exists to make that mistake structurally impossible, not just less likely.</p>
+        <p>TheForklift.dev LLC develops and publishes both. This is what happens when you don't quit.</p>
       </div>
       <div class="stats">
+        <div class="stat-card">
+          <p class="stat-num">2</p>
+          <p class="stat-label">Apps shipped by one developer</p>
+        </div>
         <div class="stat-card">
           <p class="stat-num">8</p>
           <p class="stat-label">Game modes in the FlexWord family</p>
         </div>
         <div class="stat-card">
-          <p class="stat-num">160</p>
-          <p class="stat-label">Distinct game combinations</p>
-        </div>
-        <div class="stat-card">
-          <p class="stat-num">25</p>
-          <p class="stat-label">Years from idea to shipped product</p>
+          <p class="stat-num">59</p>
+          <p class="stat-label">Age, and still shipping</p>
         </div>
         <div class="stat-card">
           <p class="stat-num">2026</p>
-          <p class="stat-label">iOS &amp; Android launch</p>
+          <p class="stat-label">Year both apps reach iOS</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="community" class="wrap">
-    <div class="platforms">
-      <p class="kicker">Community</p>
-      <h2>Play today. Take it everywhere soon.</h2>
-      <p class="section-sub">FlexWord is live on Reddit right now, with native iOS and Android apps launching later this year.</p>
-      <div class="links-row">
-        <a class="btn btn-ghost" href="https://reddit.com/r/FlexWord" target="_blank">r/FlexWord</a>
-        <a class="btn btn-ghost" href="https://reddit.com/r/FlexBard" target="_blank">r/FlexBard</a>
-        <a class="btn btn-ghost" href="https://reddit.com/r/FlexPlayCozy" target="_blank">r/FlexPlayCozy</a>
-        <a class="btn btn-ghost" href="https://github.com/forkliftdev/wordlist" target="_blank">GitHub</a>
-        <a class="btn btn-ghost" href="https://youtube.com/@theforkliftdev" target="_blank">YouTube</a>
-        <a class="btn btn-ghost" href="https://bsky.app/profile/forkliftdev.bsky.social" target="_blank">Bluesky</a>
       </div>
     </div>
   </section>
 
   <footer>
     <div class="wrap footer-inner">
-      <p><strong>TheForklift.dev LLC:</strong> Taking the con out of lexicon.</p>
-      <div class="footer-links">
-        <a href="support.html">Support</a>
-        <a href="privacy.html">Privacy</a>
+      <p><strong>TheForklift.dev LLC:</strong> small apps, built to finish.</p>
+      <div class="footer-apps">
+        <div class="footer-app-group">
+          <p>FlexWord</p>
+          <div class="footer-links">
+            <a href="flexword.html">Overview</a>
+            <a href="support.html">Support</a>
+            <a href="privacy.html">Privacy</a>
+          </div>
+        </div>
+        <div class="footer-app-group">
+          <p>CapSort</p>
+          <div class="footer-links">
+            <a href="capsort.html">Overview</a>
+            <a href="capsort-support.html">Support</a>
+            <a href="capsort-privacy.html">Privacy</a>
+          </div>
+        </div>
       </div>
       <p>&copy; 2026 TheForklift.dev</p>
     </div>

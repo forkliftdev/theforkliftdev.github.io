@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CapSort Privacy Policy | TheForklift.dev</title>
+  <meta name="description" content="How CapSort and TheForklift.dev LLC handle your data. Short version: almost none of it leaves your device." />
+  <link rel="icon" href="img/capsort-icon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0F0F12;
+      --surface: #18181d;
+      --surface-2: #1f1f26;
+      --border: rgba(242, 240, 235, 0.08);
+      --border-strong: rgba(242, 240, 235, 0.15);
+      --text: #F2F0EB;
+      --muted: #a5a39d;
+      --faint: #75746f;
+      --accent: #6f93c4;
+      --amber: #E8A838;
+      --radius: 20px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: rgba(111, 147, 196, 0.35); }
+    a { color: inherit; text-decoration: none; }
+    article a, .callout a { color: var(--accent); }
+    article a:hover, .callout a:hover { text-decoration: underline; }
+
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      background: rgba(15, 15, 18, 0.75); border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1120px; margin: 0 auto; padding: 0 24px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; letter-spacing: -0.02em; }
+    .brand-mark { width: 30px; height: 30px; border-radius: 8px; display: block; object-fit: cover; }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 500; color: var(--muted); }
+    .nav-links a { transition: color 0.15s; text-decoration: none; }
+    .nav-links a:hover { color: var(--text); }
+
+    @media (max-width: 640px) {
+      .nav-links a:not(.btn) { display: none; }
+      .nav-inner { padding: 0 16px; }
+      .nav-links .btn { padding: 8px 16px; font-size: 13px; }
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; border-radius: 999px;
+      font-weight: 600; font-size: 14px; padding: 9px 20px;
+      transition: transform 0.15s, background 0.15s, border-color 0.15s;
+      cursor: pointer; border: 1px solid transparent; text-decoration: none;
+    }
+
+    .btn-primary { background: var(--amber); color: #211705; }
+    .btn-primary:hover { transform: translateY(-1px); background: #f2b64d; text-decoration: none; }
+
+    .doc-hero { padding: 152px 0 56px; }
+
+    .kicker {
+      font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--faint); margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(34px, 5.5vw, 52px); font-weight: 800; letter-spacing: -0.03em;
+      line-height: 1.05; margin-bottom: 16px; max-width: 700px;
+    }
+
+    .doc-meta { color: var(--muted); font-size: 15px; max-width: 640px; }
+    .doc-meta strong { color: var(--text); font-weight: 600; }
+
+    .doc-body { display: grid; grid-template-columns: 220px minmax(0, 680px); gap: 56px; padding-bottom: 96px; }
+    @media (max-width: 860px) { .doc-body { grid-template-columns: 1fr; } .toc { display: none; } }
+
+    .toc { position: sticky; top: 96px; align-self: start; font-size: 14px; }
+    .toc-label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px; }
+    .toc ol { list-style: none; display: flex; flex-direction: column; gap: 10px; counter-reset: toc; }
+    .toc li { counter-increment: toc; }
+    .toc a { color: var(--muted); display: flex; gap: 10px; }
+    .toc a:hover { color: var(--text); text-decoration: none; }
+    .toc a::before {
+      content: counter(toc, decimal-leading-zero); font-variant-numeric: tabular-nums;
+      color: var(--faint); font-weight: 600; flex: none;
+    }
+
+    article section { padding: 0 0 44px; border-bottom: 1px solid var(--border); margin-bottom: 44px; scroll-margin-top: 96px; }
+    article section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 16px; }
+    h3 { font-size: 16px; font-weight: 700; margin: 24px 0 10px; color: var(--text); }
+
+    article p { color: var(--muted); font-size: 15.5px; line-height: 1.75; margin-bottom: 14px; max-width: 66ch; }
+    article p strong { color: var(--text); font-weight: 600; }
+    article ul { margin: 0 0 14px 20px; color: var(--muted); font-size: 15.5px; line-height: 1.75; }
+    article li { margin-bottom: 6px; }
+    article li strong { color: var(--text); font-weight: 600; }
+
+    .callout { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; margin: 4px 0 20px; }
+    .callout p:last-child { margin-bottom: 0; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600;
+      padding: 3px 10px; border-radius: 999px; margin-bottom: 14px;
+    }
+    .badge.provider { background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+
+    footer { border-top: 1px solid var(--border); padding: 40px 0; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--faint); }
+    .footer-inner strong { color: var(--muted); font-weight: 600; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--faint); }
+    .footer-links a:hover { color: var(--muted); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="img/forklift-icon.png" alt="TheForklift.dev" width="30" height="30" />
+        TheForklift<span style="color:var(--faint)">.dev</span>
+      </a>
+      <div class="nav-links">
+        <a href="capsort.html">CapSort</a>
+        <a href="capsort-support.html">Support</a>
+        <a class="btn btn-primary" href="mailto:forklift2flutter@gmail.com?subject=CapSort%20launch">Get notified</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="doc-hero wrap">
+    <p class="kicker">Legal</p>
+    <h1>CapSort Privacy Policy</h1>
+    <p class="doc-meta">Applies to <strong>CapSort</strong>, published by <strong>TheForklift.dev LLC</strong>. Last updated <strong>August 13, 2026</strong>.</p>
+  </header>
+
+  <div class="wrap doc-body">
+    <nav class="toc" aria-label="Table of contents">
+      <p class="toc-label">On this page</p>
+      <ol>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#access">What CapSort accesses</a></li>
+        <li><a href="#not">What CapSort doesn't do</a></li>
+        <li><a href="#purchases">Purchases</a></li>
+        <li><a href="#scrubbing">Metadata scrubbing</a></li>
+        <li><a href="#children">Children's privacy</a></li>
+        <li><a href="#changes">Changes</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ol>
+    </nav>
+
+    <article>
+      <section id="overview">
+        <h2>1. Overview</h2>
+        <p>CapSort is a screenshot-sorting app published by <strong>TheForklift.dev LLC</strong> ("we," "us"), built by a solo developer who doesn't want your data any more than you want to hand it over. This policy is short because the app doesn't do much with your information, that's intentional.</p>
+      </section>
+
+      <section id="access">
+        <h2>2. What CapSort accesses</h2>
+        <p><strong>Your screenshots.</strong> CapSort requests access to your Photos library specifically to read and sort the screenshots collection, never your full camera roll. When you sort, crop, or export a screenshot, that processing happens entirely on your device.</p>
+        <p>CapSort also requests permission to <strong>add</strong> processed images back to your Photos library, into the folders you create yourself. It never modifies or deletes your original screenshots without your explicit action, the app's trash queue requires your confirmation through Apple's own delete dialog before anything is removed.</p>
+      </section>
+
+      <section id="not">
+        <h2>3. What CapSort doesn't do</h2>
+        <ul>
+          <li>No account or sign-in required</li>
+          <li>No cloud storage or server, CapSort has no backend; nothing you sort, crop, or scrub is transmitted anywhere unless you personally choose to export or share it</li>
+          <li>No advertising, no ad tracking, no IDFA usage</li>
+          <li>No analytics SDK collecting behavioral data at this time</li>
+        </ul>
+      </section>
+
+      <section id="purchases">
+        <h2>4. Purchases</h2>
+        <span class="badge provider">RevenueCat</span>
+        <p>CapSort uses <a href="https://www.revenuecat.com" target="_blank" rel="noopener">RevenueCat</a> to manage in-app purchases and subscription entitlements. RevenueCat receives an anonymous, app-generated identifier and your purchase/transaction information from Apple in order to confirm what you've unlocked. It is not linked to your name, email, or Apple ID, and CapSort does not use it for advertising or tracking. See <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">RevenueCat's privacy policy</a> for how they handle that data.</p>
+      </section>
+
+      <section id="scrubbing">
+        <h2>5. Metadata scrubbing</h2>
+        <p>CapSort can strip GPS location, capture timestamp, and device information embedded in a screenshot before you export or share it. This stripping happens on-device, the original, unscrubbed file never leaves your phone through this feature.</p>
+      </section>
+
+      <section id="children">
+        <h2>6. Children's privacy</h2>
+        <p>CapSort is not directed at children and does not knowingly collect information from anyone.</p>
+      </section>
+
+      <section id="changes">
+        <h2>7. Changes to this policy</h2>
+        <p>If what CapSort collects changes, for example, if a future analytics tool is added, this page will be updated and the in-app version noted accordingly.</p>
+      </section>
+
+      <section id="contact">
+        <h2>8. Contact</h2>
+        <p><strong>TheForklift.dev LLC</strong><br />Email: <a href="mailto:forklift2flutter@gmail.com">forklift2flutter@gmail.com</a></p>
+      </section>
+    </article>
+  </div>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p><strong>TheForklift.dev LLC:</strong> Your screenshots, sorted. By you.</p>
+      <div class="footer-links">
+        <a href="capsort.html">CapSort</a>
+        <a href="capsort-support.html">Support</a>
+      </div>
+      <p>&copy; 2026 TheForklift.dev</p>
+    </div>
+  </footer>
+
+</body>
+</html>
