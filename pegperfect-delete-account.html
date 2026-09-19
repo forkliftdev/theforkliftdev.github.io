@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delete Your PegPerfect Account | TheForklift.dev</title>
+  <meta name="description" content="How to request deletion of your PegPerfect account and data, published by TheForklift.dev LLC." />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="img/favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="img/favicon-16.png" type="image/png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #12100e;
+      --surface: #1c1814;
+      --surface-2: #241f19;
+      --border: rgba(245, 243, 239, 0.08);
+      --border-strong: rgba(245, 243, 239, 0.15);
+      --text: #f5f3ef;
+      --muted: #a3a099;
+      --faint: #726f68;
+      --accent: #648fff;
+      --gold: #ffb000;
+      --radius: 20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: rgba(100, 143, 255, 0.35); }
+
+    a { color: inherit; text-decoration: none; }
+
+    article a, .callout a { color: var(--accent); }
+    article a:hover, .callout a:hover { text-decoration: underline; }
+
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── NAV (matches index.html) ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(18, 16, 14, 0.75);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; letter-spacing: -0.02em; }
+    .brand-mark { width: 30px; height: 30px; border-radius: 8px; display: block; object-fit: cover; }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 500; color: var(--muted); }
+    .nav-links a { transition: color 0.15s; text-decoration: none; }
+    .nav-links a:hover { color: var(--text); }
+
+    @media (max-width: 640px) {
+      .nav-links a:not(.btn) { display: none; }
+      .nav-inner { padding: 0 16px; }
+      .nav-links .btn { padding: 8px 16px; font-size: 13px; }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 9px 20px;
+      transition: transform 0.15s, background 0.15s, border-color 0.15s;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
+    }
+
+    .btn-primary { background: var(--gold); color: #211705; }
+    .btn-primary:hover { transform: translateY(-1px); background: #ffc233; text-decoration: none; }
+
+    /* ── DOC HEADER ── */
+    .doc-hero { padding: 152px 0 48px; }
+
+    .kicker {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 5.5vw, 46px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .doc-meta { color: var(--muted); font-size: 15px; }
+    .doc-meta strong { color: var(--text); font-weight: 600; }
+
+    /* ── DOC BODY ── */
+    .doc-body { padding-bottom: 96px; }
+
+    article section {
+      padding: 0 0 40px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+    article section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    h2 { font-size: 21px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 16px; }
+
+    article p { color: var(--muted); font-size: 15.5px; line-height: 1.75; margin-bottom: 14px; max-width: 66ch; }
+    article p strong { color: var(--text); font-weight: 600; }
+    article ul, article ol { margin: 0 0 14px 20px; color: var(--muted); font-size: 15.5px; line-height: 1.75; }
+    article li { margin-bottom: 10px; }
+    article li strong { color: var(--text); font-weight: 600; }
+    article li::marker { color: var(--gold); font-weight: 700; }
+
+    .steps {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 28px 14px;
+      margin: 4px 0 24px;
+    }
+    .steps ol { margin-left: 20px; }
+    .steps li { color: var(--text); }
+
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      margin: 4px 0 20px;
+    }
+    .callout p:last-child { margin-bottom: 0; }
+
+    /* ── FOOTER (matches index.html) ── */
+    footer { border-top: 1px solid var(--border); padding: 40px 0; }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--faint);
+    }
+
+    .footer-inner strong { color: var(--muted); font-weight: 600; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--faint); }
+    .footer-links a:hover { color: var(--muted); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="img/forklift-icon.png" alt="TheForklift.dev" width="30" height="30" />
+        TheForklift<span style="color:var(--faint)">.dev</span>
+      </a>
+      <div class="nav-links">
+        <a href="pegperfect-privacy.html">Privacy</a>
+        <a class="btn btn-primary" href="mailto:privacy@theforklift.dev?subject=DELETE%20ACCOUNT">Delete my account</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="doc-hero wrap">
+    <p class="kicker">Legal</p>
+    <h1>Delete your account</h1>
+    <p class="doc-meta">For <strong>PegPerfect</strong>, published by <strong>TheForklift.dev LLC</strong>, on iOS and Android.</p>
+  </header>
+
+  <div class="wrap doc-body">
+    <article>
+      <section id="how">
+        <h2>How to delete your account</h2>
+        <p>PegPerfect doesn't have a self-serve delete button yet, so we handle deletion requests by email. Here's exactly what to do:</p>
+        <div class="steps">
+          <ol>
+            <li>Email <a href="mailto:privacy@theforklift.dev?subject=DELETE%20ACCOUNT">privacy@theforklift.dev</a>.</li>
+            <li>Use the subject line <strong>"DELETE ACCOUNT."</strong></li>
+            <li>In the message, include whichever of these you have: the email address you used to sign in with Google or Apple, and/or the nickname you've used on the Daily Challenge leaderboard. PegPerfect doesn't use usernames, so this is how we find your account.</li>
+            <li>We verify the request and delete your account within <strong>30 days</strong>, and reply to the same email to confirm once it's done.</li>
+          </ol>
+        </div>
+        <div class="callout">
+          <p><strong>Only ever played as a guest?</strong> There's no account to delete; nothing about a guest is tied to a person. Your stats and history live only on your device, uninstalling the app removes them completely.</p>
+        </div>
+      </section>
+
+      <section id="what">
+        <h2>What gets deleted</h2>
+        <ul>
+          <li><strong>Deleted permanently:</strong> your profile, career stats, match history, streaks, and head-to-head bot records.</li>
+          <li><strong>Kept:</strong> if you were ever a Daily Challenge #1 finisher, that day's nickname and score stay in our public Hall of Fame archive, a historical record of daily winners, not personal data tied to a live account. Aggregated hand-difficulty data you contributed to also stays in the pool; it was never linked to your account in the first place, so there's nothing to unlink.</li>
+        </ul>
+        <p>We keep an internal backup of deleted records briefly for operational safety (for example, to recover from an accidental bulk deletion). It's never used to restore your account or contact you, and it isn't shared with anyone.</p>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <p><strong>TheForklift.dev LLC</strong><br />Email: <a href="mailto:privacy@theforklift.dev">privacy@theforklift.dev</a></p>
+        <p>See also our <a href="pegperfect-privacy.html">full privacy policy</a>.</p>
+      </section>
+    </article>
+  </div>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p><strong>TheForklift.dev LLC:</strong> apps built by one person.</p>
+      <div class="footer-links">
+        <a href="index.html">All apps</a>
+        <a href="pegperfect-privacy.html">Privacy</a>
+      </div>
+      <p>&copy; 2026 TheForklift.dev</p>
+    </div>
+  </footer>
+
+</body>
+</html>
