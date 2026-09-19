@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PegPerfect Privacy Policy | TheForklift.dev</title>
+  <meta name="description" content="How PegPerfect and TheForklift.dev LLC collect, use, and protect your data." />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="img/favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="img/favicon-16.png" type="image/png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #12100e;
+      --surface: #1c1814;
+      --surface-2: #241f19;
+      --border: rgba(245, 243, 239, 0.08);
+      --border-strong: rgba(245, 243, 239, 0.15);
+      --text: #f5f3ef;
+      --muted: #a3a099;
+      --faint: #726f68;
+
+      /* PegPerfect's own in-game palette: Ultramarine 40 (player) + Gold 20 (bot) */
+      --accent: #648fff;
+      --gold: #ffb000;
+
+      --radius: 20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: rgba(100, 143, 255, 0.35); }
+
+    a { color: inherit; text-decoration: none; }
+
+    article a, .callout a {
+      color: var(--accent);
+    }
+    article a:hover, .callout a:hover {
+      text-decoration: underline;
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── NAV (matches index.html) ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(18, 16, 14, 0.75);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .nav-links a { transition: color 0.15s; text-decoration: none; }
+    .nav-links a:hover { color: var(--text); }
+
+    @media (max-width: 640px) {
+      .nav-links a:not(.btn) { display: none; }
+      .nav-inner { padding: 0 16px; }
+      .nav-links .btn { padding: 8px 16px; font-size: 13px; }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 9px 20px;
+      transition: transform 0.15s, background 0.15s, border-color 0.15s;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
+    }
+
+    .btn-primary { background: var(--gold); color: #211705; }
+    .btn-primary:hover { transform: translateY(-1px); background: #ffc233; text-decoration: none; }
+
+    /* ── DOC HEADER ── */
+    .doc-hero {
+      padding: 152px 0 56px;
+    }
+
+    .kicker {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(34px, 5.5vw, 52px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+      max-width: 700px;
+    }
+
+    .doc-meta {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 640px;
+    }
+
+    .doc-meta strong { color: var(--text); font-weight: 600; }
+
+    /* ── DOC BODY ── */
+    .doc-body {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 680px);
+      gap: 56px;
+      padding-bottom: 96px;
+    }
+
+    @media (max-width: 860px) {
+      .doc-body { grid-template-columns: 1fr; }
+      .toc { display: none; }
+    }
+
+    .toc {
+      position: sticky;
+      top: 96px;
+      align-self: start;
+      font-size: 14px;
+    }
+
+    .toc-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 14px;
+    }
+
+    .toc ol {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      counter-reset: toc;
+    }
+
+    .toc li { counter-increment: toc; }
+
+    .toc a {
+      color: var(--muted);
+      display: flex;
+      gap: 10px;
+    }
+
+    .toc a:hover { color: var(--text); text-decoration: none; }
+
+    .toc a::before {
+      content: counter(toc, decimal-leading-zero);
+      font-variant-numeric: tabular-nums;
+      color: var(--faint);
+      font-weight: 600;
+      flex: none;
+    }
+
+    article section {
+      padding: 0 0 44px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 44px;
+      scroll-margin-top: 96px;
+    }
+
+    article section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 24px 0 10px;
+      color: var(--text);
+    }
+
+    article p {
+      color: var(--muted);
+      font-size: 15.5px;
+      line-height: 1.75;
+      margin-bottom: 14px;
+      max-width: 66ch;
+    }
+
+    article p strong { color: var(--text); font-weight: 600; }
+    article ul { margin: 0 0 14px 20px; color: var(--muted); font-size: 15.5px; line-height: 1.75; }
+    article li { margin-bottom: 6px; }
+    article li strong { color: var(--text); font-weight: 600; }
+
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      margin: 4px 0 20px;
+    }
+    .callout p:last-child { margin-bottom: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 20px;
+      font-size: 14px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      vertical-align: top;
+    }
+    th {
+      color: var(--faint);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    td strong { color: var(--text); font-weight: 600; }
+    .table-wrap { overflow-x: auto; margin-bottom: 20px; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    .badge.provider { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+
+    /* ── FOOTER (matches index.html) ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--faint);
+    }
+
+    .footer-inner strong { color: var(--muted); font-weight: 600; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--faint); }
+    .footer-links a:hover { color: var(--muted); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="img/forklift-icon.png" alt="TheForklift.dev" width="30" height="30" />
+        TheForklift<span style="color:var(--faint)">.dev</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html#apps">All apps</a>
+        <a class="btn btn-primary" href="mailto:privacy@theforklift.dev">Contact us</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="doc-hero wrap">
+    <p class="kicker">Legal</p>
+    <h1>Privacy Policy</h1>
+    <p class="doc-meta">Applies to <strong>PegPerfect</strong> (including Classic play, Kim's Kribbage, PegPerfect Streak, and the PegPerfect Challenge), published by <strong>TheForklift.dev LLC</strong>. Last updated <strong>September 19, 2026</strong>.</p>
+  </header>
+
+  <div class="wrap doc-body">
+    <nav class="toc" aria-label="Table of contents">
+      <p class="toc-label">On this page</p>
+      <ol>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#data-we-collect">Data we collect</a></li>
+        <li><a href="#how-we-use-it">How we use it</a></li>
+        <li><a href="#third-parties">Third-party services</a></li>
+        <li><a href="#retention">Retention &amp; deletion</a></li>
+        <li><a href="#your-rights">Your rights</a></li>
+        <li><a href="#children">Children's privacy</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#changes">Changes</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ol>
+    </nav>
+
+    <article>
+      <section id="overview">
+        <h2>1. Overview</h2>
+        <p>PegPerfect is a cribbage app published by <strong>TheForklift.dev LLC</strong> ("we," "us"). It's built offline-first: every hand, drill, and streak is saved to your device the moment it happens, and syncs to the cloud only when you're signed in and online. This policy explains what PegPerfect collects, why, who it's shared with, and the choices you have. It covers PegPerfect across iOS and Android, including Classic matches, Kim's Kribbage and other practice drills, PegPerfect Streak, and the PegPerfect Challenge (Daily Challenge).</p>
+      </section>
+
+      <section id="data-we-collect">
+        <h2>2. Data we collect</h2>
+
+        <h3>Account &amp; authentication</h3>
+        <p>Every install gets a random, anonymous account the moment you open the app, so your stats and history aren't lost to a crash or reinstall as long as you stay signed in. If you choose to sign in with Google or with Sign in with Apple, that sign-in is linked onto the same anonymous account rather than starting a new one, and we collect the <strong>email address</strong> and <strong>name</strong> your Google or Apple account provides. You can also keep playing as a guest indefinitely, in which case you're identified only by a random, pseudonymous ID with no personal information attached.</p>
+
+        <h3>Gameplay &amp; stats</h3>
+        <p>When you're signed in and online, we store the following in our cloud database, linked to your account ID:</p>
+        <div class="table-wrap">
+        <table>
+          <tr><th>Data</th><th>Why we collect it</th></tr>
+          <tr><td>Career stats: games played/won/lost, hand &amp; crib averages, pegging differential, skunks, best hands</td><td>Your career stats dashboard</td></tr>
+          <tr><td>Match history: final scores, margin, skill &amp; luck ratings, which bot you played</td><td>Match history, and tuning bot difficulty</td></tr>
+          <tr><td>Sign-in &amp; play streaks, favorite mode</td><td>Streak tracking and engagement features</td></tr>
+          <tr><td>Daily Challenge results: score, accuracy, time</td><td>Your stats, and the daily leaderboard</td></tr>
+        </table>
+        </div>
+
+        <h3>Daily Challenge leaderboard</h3>
+        <p>If you sign in with a real account (not just a guest), you can submit a nickname you choose, along with your score, accuracy, and time, to the daily leaderboard. This is visible to other signed-in players. Whoever finishes #1 each day is kept permanently as part of our public "Hall of Fame" record, even if you later delete your account, everyone else's daily entry is temporary (see <a href="#retention">§5</a>).</p>
+
+        <h3>Hand-difficulty data</h3>
+        <p>We track, in aggregate, how often players get a specific hand-and-cut combination right or wrong, and how long it takes to answer. This is pooled across everyone who plays and is never tied back to your account. We use it to calibrate puzzle difficulty and pick featured practice hands.</p>
+
+        <h3>Reports</h3>
+        <p>If you report another player's leaderboard nickname, we store your account ID, the reported account ID, and the day, so we can review it. Nobody else can read these.</p>
+
+        <h3>Crash &amp; diagnostic data</h3>
+        <p>Firebase Crashlytics automatically collects crash logs and basic device information (device model, OS version) so we can find and fix bugs.</p>
+
+        <h3>Usage events</h3>
+        <p>Firebase Analytics logs lightweight, pseudonymous events, like which mode you opened or whether you finished a drill, tied to your account ID but never your name or email.</p>
+
+        <h3>On-device data</h3>
+        <p>Your in-progress game, local stats cache, and settings are stored on your device so PegPerfect works fully offline. This is cleared when you uninstall the app and is never sent to us unless you're signed in and online.</p>
+
+        <div class="callout">
+          <p><strong>No advertising.</strong> PegPerfect doesn't show ads and doesn't include any ad SDK. We don't collect an advertising identifier (IDFA or Advertising ID), and nothing about your play is used to target ads, because there aren't any.</p>
+        </div>
+      </section>
+
+      <section id="how-we-use-it">
+        <h2>3. How we use it</h2>
+        <ul>
+          <li><strong>Run the game:</strong> sync your progress, stats, and history across devices.</li>
+          <li><strong>Calibrate difficulty:</strong> aggregated hand-accuracy data and bot head-to-head records shape puzzle difficulty and bot balance. We periodically export aggregated stats internally to check things like whether a bot difficulty is too easy or too hard, these exports are for our own game-balance decisions, not shared outside the company.</li>
+          <li><strong>Run the leaderboard:</strong> post your Daily Challenge result and moderate reported nicknames.</li>
+          <li><strong>Manage your purchase:</strong> PegPerfect Pro entitlement status is synced via RevenueCat.</li>
+          <li><strong>Fix bugs and understand usage:</strong> crash reports and aggregate, pseudonymous event data.</li>
+        </ul>
+        <p>We do not sell your data, and we do not share your gameplay with other players beyond what you choose to put on the leaderboard.</p>
+      </section>
+
+      <section id="third-parties">
+        <h2>4. Third-party services</h2>
+
+        <span class="badge provider">Google Firebase</span>
+        <p>Handles authentication, stores your gameplay data (Cloud Firestore), and provides analytics and crash reporting. Subject to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
+
+        <span class="badge provider">RevenueCat</span>
+        <p>Manages your PegPerfect Pro purchase and links your account ID to your entitlement status. Subject to <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">RevenueCat's Privacy Policy</a>.</p>
+
+        <span class="badge provider">Google Sign-In &amp; Sign in with Apple</span>
+        <p>Used only to authenticate you. We don't request access to your contacts, calendar, or location through these providers.</p>
+      </section>
+
+      <section id="retention">
+        <h2>5. Data retention &amp; deletion</h2>
+        <p>We keep career stats, streaks, head-to-head bot records, and hand-difficulty data for as long as your account exists, since your stats dashboard depends on them. Individual match logs (the play-by-play record of a single game) are pruned from our live database after about 60 days; we keep an internal backup before anything is pruned. Daily leaderboard entries are pruned after about 30 days, except each day's #1 finisher, which we keep permanently as a historical record (nickname and score only). On-device data is cleared when you uninstall the app.</p>
+        <p>To delete your account and history, email <a href="mailto:privacy@theforklift.dev">privacy@theforklift.dev</a> with the subject line "PRIVACY REQUEST." We'll permanently delete your stats, match history, and streaks. A daily win you're credited with stays in the public Hall of Fame record, but nothing else about you does.</p>
+      </section>
+
+      <section id="your-rights">
+        <h2>6. Your rights</h2>
+        <p>Depending on where you live, you may have the right to access a copy of your data, correct it, request deletion, export your history, or object to certain processing. To exercise any of these, email <a href="mailto:privacy@theforklift.dev">privacy@theforklift.dev</a>.</p>
+        <p>PegPerfect's infrastructure runs on Google Cloud / Firebase, which may process data in the United States. By using PegPerfect, you consent to your data being processed there.</p>
+      </section>
+
+      <section id="children">
+        <h2>7. Children's privacy</h2>
+        <p>PegPerfect is not directed at children under 13 and we do not knowingly collect personal information from them. If you believe a child under 13 has provided us personal information, contact us at <a href="mailto:privacy@theforklift.dev">privacy@theforklift.dev</a> and we'll delete it.</p>
+      </section>
+
+      <section id="security">
+        <h2>8. Security</h2>
+        <ul>
+          <li>Data in transit is encrypted with TLS 1.2+.</li>
+          <li>Data at rest in Firestore is encrypted using Google-managed encryption.</li>
+          <li>Passwords are hashed by Firebase Authentication; we never see or store them in plain text.</li>
+          <li>No method of transmission or storage is 100% secure, but we work to protect your data using industry-standard practices.</li>
+        </ul>
+      </section>
+
+      <section id="changes">
+        <h2>9. Changes to this policy</h2>
+        <p>We may update this policy as PegPerfect adds features. Material changes will be reflected here with an updated date, and significant changes will be announced in-app.</p>
+      </section>
+
+      <section id="contact">
+        <h2>10. Contact</h2>
+        <p><strong>TheForklift.dev LLC</strong><br />Email: <a href="mailto:privacy@theforklift.dev">privacy@theforklift.dev</a></p>
+        <p>For account deletion or data requests, include "PRIVACY REQUEST" in your subject line.</p>
+      </section>
+    </article>
+  </div>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p><strong>TheForklift.dev LLC:</strong> apps built by one person.</p>
+      <div class="footer-links">
+        <a href="index.html">All apps</a>
+        <a href="mailto:privacy@theforklift.dev">Contact</a>
+      </div>
+      <p>&copy; 2026 TheForklift.dev</p>
+    </div>
+  </footer>
+
+</body>
+</html>
