@@ -342,7 +342,7 @@
   <header class="doc-hero wrap">
     <p class="kicker">Legal</p>
     <h1>Privacy Policy</h1>
-    <p class="doc-meta">Applies to <strong>PegPerfect</strong> (including Classic play, Kim's Kribbage, PegPerfect Streak, and the PegPerfect Challenge), published by <strong>TheForklift.dev LLC</strong>. Last updated <strong>September 19, 2026</strong>.</p>
+    <p class="doc-meta">Applies to <strong>PegPerfect</strong> (including Classic play, Kim's Kribbage, PegPerfect Streak, and the PegPerfect Challenge), published by <strong>TheForklift.dev LLC</strong>. Version <strong>1.1</strong>, last updated <strong>September 25, 2026</strong>.</p>
   </header>
 
   <div class="wrap doc-body">
@@ -392,6 +392,9 @@
         <h3>Hand-difficulty data</h3>
         <p>We track, in aggregate, how often players get a specific hand-and-cut combination right or wrong, and how long it takes to answer. This is pooled across everyone who plays and is never tied back to your account. We use it to calibrate puzzle difficulty and pick featured practice hands.</p>
 
+        <h3>Game-tempo data</h3>
+        <p>We also keep app-wide totals of how long games take and which PegPerfect Turbo speeds people use. These are running totals with no account ID in them, so they can't be traced back to you. We use them to tune game pacing.</p>
+
         <h3>Reports</h3>
         <p>If you report another player's leaderboard nickname, we store your account ID, the reported account ID, and the day, so we can review it. Nobody else can read these.</p>
 
@@ -402,7 +405,7 @@
         <p>Firebase Analytics logs lightweight, pseudonymous events, like which mode you opened or whether you finished a drill, tied to your account ID but never your name or email.</p>
 
         <h3>On-device data</h3>
-        <p>Your in-progress game, local stats cache, and settings are stored on your device so PegPerfect works fully offline. This is cleared when you uninstall the app and is never sent to us unless you're signed in and online.</p>
+        <p>Your in-progress game, local stats cache, and settings are stored on your device so PegPerfect works fully offline. This is cleared when you uninstall the app and is never sent to us unless you're signed in and online. Deleting your account also clears your history, records, and achievements from the device (see <a href="#retention">§5</a>).</p>
 
         <div class="callout">
           <p><strong>No advertising.</strong> PegPerfect doesn't show ads and doesn't include any ad SDK. We don't collect an advertising identifier (IDFA or Advertising ID), and nothing about your play is used to target ads, because there aren't any.</p>
@@ -437,7 +440,16 @@
       <section id="retention">
         <h2>5. Data retention &amp; deletion</h2>
         <p>We keep career stats, streaks, head-to-head bot records, and hand-difficulty data for as long as your account exists, since your stats dashboard depends on them. Individual match logs (the play-by-play record of a single game) are pruned from our live database after about 60 days; we keep an internal backup before anything is pruned. Daily leaderboard entries are pruned after about 30 days, except each day's #1 finisher, which we keep permanently as a historical record (nickname and score only). On-device data is cleared when you uninstall the app.</p>
-        <p>To delete your account and history, see <a href="pegperfect-delete-account.html">how to delete your account</a>. We'll permanently delete your stats, match history, and streaks. A daily win you're credited with stays in the public Hall of Fame record, but nothing else about you does.</p>
+        <h3>Deleting your account</h3>
+        <p>You can delete your account at any time, right in the app: open Settings, then Account, then <strong>Delete account</strong>. You'll sign in with Apple or Google once more to confirm it's you, and then it happens immediately. You don't need to email anyone. If you can't open the app, you can also ask us by email. Full steps are on <a href="pegperfect-delete-account.html">how to delete your account</a>.</p>
+        <p>Deleting your account:</p>
+        <ul>
+          <li><strong>Permanently deletes from our servers</strong> your profile, career stats, match history, streaks, head-to-head bot records, Daily Challenge results, daily leaderboard entries, and your login.</li>
+          <li><strong>Clears from your device</strong> your history, records, achievements, leaderboard nickname, and saved game. Your settings and free-trial status stay.</li>
+          <li><strong>Revokes PegPerfect's access</strong> to your Sign in with Apple and Google sign-in.</li>
+          <li><strong>Doesn't cancel a PegPerfect Pro subscription.</strong> That's billed by Apple or Google, so you cancel it with them. The app links you to the right place.</li>
+        </ul>
+        <p>What stays is data that doesn't identify you: a daily win you're credited with stays in the Hall of Fame record, and your play remains part of the app-wide hand-difficulty and game-tempo totals, which never had your account ID in them. A nickname report you filed stays for moderation, and RevenueCat keeps a purchase record, both under your old account ID, which no longer points to anyone. Email us and we'll remove the RevenueCat record too. Crash reports and usage events expire on Firebase's normal schedule.</p>
       </section>
 
       <section id="your-rights">
