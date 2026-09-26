@@ -150,18 +150,20 @@
   <header class="doc-hero wrap">
     <p class="kicker">Legal</p>
     <h1>CapSort Privacy Policy</h1>
-    <p class="doc-meta">Applies to <strong>CapSort</strong>, published by <strong>TheForklift.dev LLC</strong>. Last updated <strong>September 25, 2026</strong>.</p>
+    <p class="doc-meta">Applies to <strong>CapSort</strong>, published by <strong>TheForklift.dev LLC</strong>. Last updated <strong>September 26, 2026</strong>.</p>
   </header>
 
   <div class="wrap doc-body">
     <nav class="toc" aria-label="Table of contents">
       <p class="toc-label">On this page</p>
       <ol>
-        <li><a href="#overview">Overview</a></li>
+        <li><a href="#overview">The short version</a></li>
         <li><a href="#access">What CapSort accesses</a></li>
-        <li><a href="#not">What CapSort doesn't do</a></li>
+        <li><a href="#device">What stays on your phone</a></li>
+        <li><a href="#network">What goes over the internet</a></li>
+        <li><a href="#sharing">When you share or export</a></li>
         <li><a href="#purchases">Purchases</a></li>
-        <li><a href="#scrubbing">Metadata scrubbing</a></li>
+        <li><a href="#not">What CapSort never does</a></li>
         <li><a href="#deletion">Deleting your data</a></li>
         <li><a href="#children">Children's privacy</a></li>
         <li><a href="#changes">Changes</a></li>
@@ -171,57 +173,85 @@
 
     <article>
       <section id="overview">
-        <h2>1. Overview</h2>
-        <p>CapSort is a screenshot-sorting app published by <strong>TheForklift.dev LLC</strong> ("we," "us"), built by a solo developer who doesn't want your data any more than you want to hand it over. This policy is short because the app doesn't do much with your information, that's intentional.</p>
+        <h2>1. The short version</h2>
+        <div class="callout">
+          <p><strong>Your screenshots never leave your phone unless you choose to share them.</strong> CapSort has no accounts, no server, no ads and no analytics. The only thing it sends anywhere is a purchase check, so it knows whether you've bought the unlock.</p>
+        </div>
+        <p>CapSort is a screenshot-sorting app published by <strong>TheForklift.dev LLC</strong> ("we," "us"). It's built by a solo developer who doesn't want your data. This policy is short because the app does very little with your information, and that's on purpose.</p>
       </section>
 
       <section id="access">
         <h2>2. What CapSort accesses</h2>
-        <p><strong>Your screenshots.</strong> CapSort asks for access to your Photos library. iOS only offers that access for the whole library, but CapSort only reads your Screenshots collection and ignores the rest of your photos. When you sort, crop, or export a screenshot, that processing happens entirely on your device.</p>
-        <p>CapSort also requests permission to <strong>add</strong> processed images back to your Photos library, into the folders you create yourself. It never modifies or deletes your original screenshots without your explicit action, the app's trash queue requires your confirmation through Apple's own delete dialog before anything is removed.</p>
+        <p><strong>Your screenshots.</strong> CapSort asks for access to your Photos library. iOS only offers that access for the whole library, but CapSort reads only your Screenshots collection and ignores the rest of your photos.</p>
+        <p><strong>Adding to Photos.</strong> When you sort a screenshot, CapSort adds it to an album you named. Crops and posters you make are saved as new photos in that album. Your original screenshot is never changed.</p>
+        <p><strong>Deleting from Photos.</strong> CapSort only deletes a screenshot you put in its trash, and only after you confirm in Apple's own delete dialog. Deleted photos go to Photos' Recently Deleted album, as usual.</p>
       </section>
 
-      <section id="not">
-        <h2>3. What CapSort doesn't do</h2>
+      <section id="device">
+        <h2>3. What stays on your phone</h2>
+        <p>All of CapSort's work happens on your iPhone:</p>
         <ul>
-          <li>No account or sign-in required</li>
-          <li>No cloud storage or server, CapSort has no backend; nothing you sort, crop, or scrub is transmitted anywhere unless you personally choose to export or share it</li>
-          <li>One exception: when the metadata panel shows where a screenshot was taken, the map is drawn with Apple Maps, which loads map images for that area from Apple. The screenshot itself is never sent</li>
-          <li>No advertising, no ad tracking, no IDFA usage</li>
-          <li>No analytics SDK collecting behavioral data at this time</li>
+          <li>Sorting, cropping, posters and PDF export</li>
+          <li>Finding similar screenshots, which uses Apple's on-device image analysis</li>
+          <li>Removing location, time and device details from files you export</li>
+        </ul>
+        <p>CapSort also keeps a few things in its own storage on your phone: your albums' names, which screenshots you've sorted, your streaks and stats, your settings, and your free-tier counts (sorts this week, and whether you've used your free PDF). None of it is sent anywhere.</p>
+      </section>
+
+      <section id="network">
+        <h2>4. What goes over the internet</h2>
+        <p>Only two things, and neither one includes your screenshots:</p>
+        <ul>
+          <li><strong>The purchase check.</strong> CapSort asks RevenueCat whether you've bought the unlock. See <a href="#purchases">Purchases</a> below.</li>
+          <li><strong>Maps.</strong> If a screenshot has a location saved in it and you open its details, the map is drawn with Apple Maps, which loads map images for that area from Apple. The screenshot itself isn't sent.</li>
         </ul>
       </section>
 
-      <section id="purchases">
-        <h2>4. Purchases</h2>
-        <span class="badge provider">RevenueCat</span>
-        <p>CapSort uses <a href="https://www.revenuecat.com" target="_blank" rel="noopener">RevenueCat</a> to manage in-app purchases and subscription entitlements. RevenueCat receives an anonymous, app-generated identifier and your purchase/transaction information from Apple in order to confirm what you've unlocked. It is not linked to your name, email, or Apple ID, and CapSort does not use it for advertising or tracking. See <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">RevenueCat's privacy policy</a> for how they handle that data.</p>
+      <section id="sharing">
+        <h2>5. When you share or export</h2>
+        <p>A screenshot or PDF leaves your phone only when you tap share and pick where it goes, like Messages, Mail, Files or AirDrop. From then on, the app you picked handles it under its own privacy policy.</p>
+        <p>Every file CapSort offers to share has the location, capture time and device details stored inside it removed first, and CapSort checks the file to make sure they're gone. PDFs never contain location or device details. A setting in the app decides whether copies saved to your albums are cleaned the same way.</p>
       </section>
 
-      <section id="scrubbing">
-        <h2>5. Metadata scrubbing</h2>
-        <p>CapSort can strip GPS location, capture timestamp, and device information embedded in a screenshot before you export or share it. This stripping happens on-device, the original, unscrubbed file never leaves your phone through this feature.</p>
+      <section id="purchases">
+        <h2>6. Purchases</h2>
+        <span class="badge provider">RevenueCat</span>
+        <p>CapSort is free to use, with a one-time purchase that unlocks unlimited sorting, PDF export, more albums and no watermark. There's no subscription. The purchase is made through Apple, and CapSort never sees your payment details.</p>
+        <p>CapSort uses <a href="https://www.revenuecat.com" target="_blank" rel="noopener">RevenueCat</a> to confirm what you've bought. RevenueCat receives a random identifier that CapSort creates, your purchase record from Apple, and basic technical details that come with any internet request, such as your app version, iOS version and IP address. The identifier isn't linked to your name, email or Apple ID, and it isn't used for advertising or tracking. See <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">RevenueCat's privacy policy</a> for how they handle that data.</p>
+      </section>
+
+      <section id="not">
+        <h2>7. What CapSort never does</h2>
+        <ul>
+          <li>No account or sign-in</li>
+          <li>No cloud storage or server of our own</li>
+          <li>No advertising, and no ad tracking or advertising identifier (IDFA)</li>
+          <li>No analytics collecting how you use the app</li>
+          <li>No selling or sharing of your data with anyone</li>
+        </ul>
       </section>
 
       <section id="deletion">
-        <h2>6. Deleting your data</h2>
-        <p>CapSort has no accounts, so there is no account to delete. Everything the app stores (your sort progress, streaks, and settings) lives only on your device. Deleting CapSort from your iPhone removes all of it. Anything you saved to your Photos library stays there until you delete it in Photos.</p>
-        <p>RevenueCat keeps a record of purchases under an anonymous identifier that isn't linked to you. To have that record removed, email <a href="mailto:forklift2flutter@gmail.com?subject=CapSort%20data%20deletion">forklift2flutter@gmail.com</a>. Your purchase itself stays with your Apple ID and can be restored at any time.</p>
+        <h2>8. Deleting your data</h2>
+        <p><strong>There's no account to delete.</strong> CapSort doesn't have accounts, so nothing about you is stored on a server we run.</p>
+        <p>Everything CapSort stores lives on your phone. To erase it, delete CapSort from your iPhone. That removes your sort history, streaks, stats and settings. Albums and photos CapSort saved to your Photos library stay there until you delete them in Photos.</p>
+        <p>RevenueCat keeps your purchase record under the random identifier described above. To have that record removed, email <a href="mailto:forklift2flutter@gmail.com?subject=CapSort%20data%20deletion">forklift2flutter@gmail.com</a> with the subject "CapSort data deletion" and we'll take care of it within 30 days. Your purchase itself stays with your Apple ID, and you can restore it at any time from Settings in CapSort.</p>
       </section>
 
       <section id="children">
-        <h2>7. Children's privacy</h2>
-        <p>CapSort is not directed at children and does not knowingly collect information from anyone.</p>
+        <h2>9. Children's privacy</h2>
+        <p>CapSort isn't directed at children, and it doesn't knowingly collect information from anyone.</p>
       </section>
 
       <section id="changes">
-        <h2>8. Changes to this policy</h2>
-        <p>If what CapSort collects changes, for example, if a future analytics tool is added, this page will be updated and the in-app version noted accordingly.</p>
+        <h2>10. Changes to this policy</h2>
+        <p>If what CapSort collects ever changes, for example if an analytics tool is added, this page will be updated first and the date at the top will change.</p>
       </section>
 
       <section id="contact">
-        <h2>9. Contact</h2>
+        <h2>11. Contact</h2>
         <p><strong>TheForklift.dev LLC</strong><br />Email: <a href="mailto:forklift2flutter@gmail.com">forklift2flutter@gmail.com</a></p>
+        <p>For help using the app, see <a href="capsort-support.html">CapSort Support</a>.</p>
       </section>
     </article>
   </div>
