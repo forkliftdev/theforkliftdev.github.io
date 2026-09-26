@@ -76,7 +76,7 @@
     .btn-ghost { border-color: var(--border-strong); color: var(--text); }
     .btn-ghost:hover { border-color: rgba(242, 240, 235, 0.3); text-decoration: none; }
 
-    .doc-hero { padding: 152px 0 40px; }
+    .doc-hero { padding-top: 152px; padding-bottom: 40px; }
 
     .kicker {
       font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
@@ -143,7 +143,6 @@
       <div class="nav-links">
         <a href="capsort.html">CapSort</a>
         <a href="capsort-privacy.html">Privacy</a>
-        <a class="btn btn-primary" href="mailto:forklift2flutter@gmail.com?subject=CapSort%20launch">Get notified</a>
       </div>
     </div>
   </nav>
@@ -158,13 +157,13 @@
         <div class="chip">@</div>
         <h3>Email us</h3>
         <p>The fastest way to reach us. One person reads every message, so expect a reply within a few days rather than a bot.</p>
-        <a class="btn btn-ghost" href="mailto:forklift2flutter@gmail.com">forklift2flutter@gmail.com</a>
+        <a class="btn btn-ghost" href="mailto:chris@theforklift.dev">chris@theforklift.dev</a>
       </div>
       <div class="contact-card">
         <div class="chip" style="background:color-mix(in srgb, var(--amber) 16%, transparent); color:var(--amber); border-color:color-mix(in srgb, var(--amber) 30%, transparent);">!</div>
         <h3>Found a bug?</h3>
         <p>Email what you were doing, what you expected, and, if you can, a screenshot of the issue itself. Much appreciated.</p>
-        <a class="btn btn-ghost" href="mailto:forklift2flutter@gmail.com?subject=CapSort%20bug">Report a bug</a>
+        <a class="btn btn-ghost" href="mailto:chris@theforklift.dev?subject=CapSort%20bug">Report a bug</a>
       </div>
       <div class="contact-card">
         <div class="chip">$</div>
@@ -179,28 +178,44 @@
     <p class="section-label">Frequently asked</p>
     <div class="faq">
       <details>
-        <summary>Why does CapSort only see my screenshots, not my whole photo library?</summary>
-        <p>That's by design, CapSort reads Apple's built-in screenshots collection only. It's not a general photo organizer.</p>
+        <summary>What's free, and what does the unlock add?</summary>
+        <p>Free: 25 sorts into albums each week (the count resets every week), up to 4 albums, and trash is always free. The unlock is a single $4.99 purchase, not a subscription. It adds unlimited sorting, PDF export of any album, up to 8 albums, and removes the "sorted with CapSort" watermark from cropped, poster and canvas images.</p>
       </details>
       <details>
-        <summary>Does CapSort upload my screenshots anywhere?</summary>
-        <p>No. All sorting, cropping, and metadata scrubbing happen on your device. Nothing leaves your phone unless you tap export or share. See the <a href="capsort-privacy.html">Privacy Policy</a> for the full detail.</p>
+        <summary>I bought the unlock. How do I get it back on a new phone or after reinstalling?</summary>
+        <p>Open CapSort, go to <strong>Settings</strong>, and tap <strong>restore purchases</strong>. Use the same Apple ID you bought it with. The purchase screen has a restore button too.</p>
       </details>
       <details>
         <summary>How do I get a refund for a purchase?</summary>
-        <p>CapSort purchases go through Apple's standard App Store billing, refunds are handled by Apple, not CapSort directly. Request one at <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener">reportaproblem.apple.com</a>.</p>
+        <p>CapSort purchases go through Apple's standard App Store billing, so refunds are handled by Apple, not by us. Request one at <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener">reportaproblem.apple.com</a>.</p>
+      </details>
+      <details>
+        <summary>Why does CapSort ask for my whole photo library?</summary>
+        <p>iOS only offers photo access for the whole library, so that's what the permission prompt asks for. CapSort itself reads only your Screenshots collection and ignores the rest of your photos. If you chose "Limit Access", you can add more screenshots any time from CapSort's <strong>Settings</strong>.</p>
+      </details>
+      <details>
+        <summary>Does CapSort upload my screenshots anywhere?</summary>
+        <p>No. Sorting, cropping, PDF export and metadata scrubbing all happen on your device. Nothing leaves your phone unless you tap export or share. See the <a href="capsort-privacy.html">Privacy Policy</a> for the full detail.</p>
       </details>
       <details>
         <summary>What happens to a screenshot when I sort it?</summary>
-        <p>It's added to the folder (Photos album) you drop it in, and cleared from CapSort's queue so it won't show up again. Your original stays in your Photos library, sorting doesn't delete anything.</p>
+        <p>It's added to the Photos album you dropped it in, titled "CapSorted: <em>your album name</em>" so all of CapSort's albums sit together in Photos. It then leaves CapSort's queue so it won't show up again. Your original stays in your Photos library: sorting never deletes anything.</p>
       </details>
       <details>
         <summary>What happens when I trash a screenshot?</summary>
-        <p>It's queued in CapSort's trash for the rest of your sort session, so you're not interrupted by a delete confirmation after every swipe. When you empty the trash, Apple's own one-time delete dialog confirms the whole batch at once.</p>
+        <p>It's queued in CapSort's trash, so you're not interrupted by a delete confirmation after every swipe. When you empty the trash, Apple's own delete dialog confirms the whole batch at once, and the screenshots go to Recently Deleted in Photos, where you can still recover them for 30 days.</p>
+      </details>
+      <details>
+        <summary>What is timed sort?</summary>
+        <p>A 3-minute sorting sprint. CapSort measures your pace during it and uses that to estimate how long it will take to clear the rest of your screenshots. The estimate appears on the Stats tab.</p>
+      </details>
+      <details>
+        <summary>How do I delete my data?</summary>
+        <p>CapSort has no accounts and no server. Everything it stores (your sort progress, streaks and settings) lives only on your phone, and deleting the app removes all of it. Albums CapSort created stay in Photos until you delete them there. See <a href="capsort-privacy.html#deletion">Deleting your data</a> in the Privacy Policy.</p>
       </details>
       <details>
         <summary>I found a bug.</summary>
-        <p>Email <a href="mailto:forklift2flutter@gmail.com">forklift2flutter@gmail.com</a> with what you were doing, what you expected, and, if you can, a screenshot of the issue itself.</p>
+        <p>Email <a href="mailto:chris@theforklift.dev?subject=CapSort%20bug">chris@theforklift.dev</a> with what you were doing, what you expected, and, if you can, a screenshot of the issue itself.</p>
       </details>
     </div>
   </div>
