@@ -4,8 +4,8 @@
 <meta name="google-site-verification" content="ZvWrpq4CPv5_zTkDeVnhceM6iUaiJTT4nuTAiPQflu8" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TheForklift.dev — apps built by one person</title>
-  <meta name="description" content="TheForklift.dev LLC: FlexWord, a word puzzle mega app, and CapSort, a screenshot-sorting app for iOS. Built by a forklift driver turned indie developer." />
+  <title>TheForklift.dev | apps built by one person</title>
+  <meta name="description" content="TheForklift.dev LLC: FlexWord, a word puzzle mega app, and CapSort, a screenshot-sorting app for iOS, and PegPerfect, a cribbage app. Built by a forklift driver turned indie developer." />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="img/favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="img/favicon-16.png" type="image/png" sizes="16x16" />
@@ -29,6 +29,7 @@
       --c-flexword-2: #34c77b;
       --c-capsort: #6f93c4;
       --c-capsort-2: #e8a838;
+      --c-pegperfect: #ffb000;
 
       --radius: 20px;
     }
@@ -233,6 +234,17 @@
       border: 1px solid var(--border);
     }
 
+    .app-icon-peg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: #12100e;
+      background: linear-gradient(135deg, #ffb000, #648fff);
+    }
+
     .app-status {
       display: inline-flex;
       align-items: center;
@@ -330,12 +342,12 @@
   </nav>
 
   <header class="hero wrap">
-    <div class="pill"><span class="dot"></span> Two apps, <strong>one developer</strong></div>
+    <div class="pill"><span class="dot"></span> Three apps, <strong>one developer</strong></div>
     <h1>Small, focused apps.<br />Built to actually finish.</h1>
     <p class="hero-sub">
       TheForklift.dev LLC makes deliberately narrow tools: a word game platform with
-      eight ways to play, and a screenshot triage app that does one job well. No bloat,
-      no growth-hacked feature creep — just things worth shipping.
+      eight ways to play, a screenshot triage app, and a cribbage game. No bloat.
+      No feature creep. Just things worth shipping.
     </p>
   </header>
 
@@ -370,6 +382,18 @@
           <span class="btn btn-ghost">See CapSort →</span>
         </div>
       </a>
+
+      <a class="app-card" style="--accent: var(--c-pegperfect)" href="pegperfect.html">
+        <div class="app-card-top">
+          <div class="app-icon app-icon-peg" aria-hidden="true">PP</div>
+          <span class="app-status"><span class="dot"></span>Coming to the App Store</span>
+        </div>
+        <p class="app-name">PegPerfect</p>
+        <p class="app-tagline">A cribbage game for iOS. Support and privacy policy are on its page.</p>
+        <div class="app-card-links">
+          <span class="btn btn-ghost">See PegPerfect →</span>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -381,9 +405,9 @@
     <div class="story">
       <div>
         <p><strong>Age is just a data type.</strong> I'm Chris Webb, a warehouse worker Monday through Wednesday, indie developer Thursday through Saturday. I'm 59 years old, I operate a forklift for a living, and I build software with a <i>little</i> help from AI.</p>
-        <p>FlexWord started as a Wordle clone — the classic first project — and grew into an eight-mode word game platform because stopping at "clone" felt like a waste of the idea.</p>
-        <p>CapSort came from a much smaller irritation: a screenshot library with thousands of unsorted images and no fast way to deal with them. Apple's own crop tools are unreliable enough that people have leaked uncropped screenshots into Slack by accident — CapSort exists to make that mistake structurally impossible, not just less likely.</p>
-        <p>TheForklift.dev LLC develops and publishes both. This is what happens when you don't quit.</p>
+        <p>FlexWord started as a word-game clone, the classic first project. It grew into an eight-mode platform because stopping at "clone" felt like a waste of the idea.</p>
+        <p>CapSort came from a much smaller irritation: a screenshot library with thousands of unsorted images and no fast way to deal with them. Apple's own crop tools are unreliable enough that people have leaked uncropped screenshots into Slack by accident. CapSort exists to make that mistake structurally impossible, not just less likely.</p>
+        <p>PegPerfect is the third: a cribbage app, coming to the App Store. TheForklift.dev LLC develops and publishes all three. This is what happens when you don't quit.</p>
       </div>
       <div class="stats">
         <div class="stat-card">
@@ -424,6 +448,14 @@
             <a href="capsort.html">Overview</a>
             <a href="capsort-support.html">Support</a>
             <a href="capsort-privacy.html">Privacy</a>
+          </div>
+        </div>
+        <div class="footer-app-group">
+          <p>PegPerfect</p>
+          <div class="footer-links">
+            <a href="pegperfect.html">Overview</a>
+            <a href="pegperfect.html#support">Support</a>
+            <a href="pegperfect-privacy.html">Privacy</a>
           </div>
         </div>
       </div>
