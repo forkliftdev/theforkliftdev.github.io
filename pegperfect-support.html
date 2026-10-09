@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PegPerfect Support | TheForklift.dev</title>
+  <meta name="description" content="Get help with PegPerfect: Pro purchase, stats, syncing, scoring questions, and account deletion." />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="img/favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="img/favicon-16.png" type="image/png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #12100e;
+      --surface: #1c1814;
+      --surface-2: #241f19;
+      --border: rgba(245, 243, 239, 0.08);
+      --border-strong: rgba(245, 243, 239, 0.15);
+      --text: #f5f3ef;
+      --muted: #a3a099;
+      --faint: #726f68;
+
+      --c-accent: #648fff;
+      --c-gold: #ffb000;
+
+      --radius: 20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: rgba(100, 143, 255, 0.35); }
+
+    a { color: inherit; text-decoration: none; }
+
+    article a, .callout a, .faq a {
+      color: var(--c-accent);
+    }
+    article a:hover, .callout a:hover, .faq a:hover {
+      text-decoration: underline;
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── NAV (matches index.html) ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(18, 16, 14, 0.75);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .nav-links a { transition: color 0.15s; text-decoration: none; }
+    .nav-links a:hover { color: var(--text); }
+
+    @media (max-width: 640px) {
+      .nav-links a:not(.btn) { display: none; }
+      .nav-inner { padding: 0 16px; }
+      .nav-links .btn { padding: 8px 16px; font-size: 13px; }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 9px 20px;
+      transition: transform 0.15s, background 0.15s, border-color 0.15s;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
+    }
+
+    .btn-primary { background: #fff; color: #0a0a0c; }
+    .btn-primary:hover { transform: translateY(-1px); background: #e9e9ee; text-decoration: none; }
+
+    .btn-ghost {
+      border-color: var(--border-strong);
+      color: var(--text);
+    }
+    .btn-ghost:hover { border-color: rgba(255, 255, 255, 0.3); text-decoration: none; }
+
+    /* ── DOC HEADER ── */
+    .doc-hero {
+      padding: 152px 0 40px;
+    }
+
+    .kicker {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(34px, 5.5vw, 52px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+      max-width: 700px;
+    }
+
+    .doc-meta {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 640px;
+    }
+
+    /* ── CONTACT CARD ── */
+    .contact-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 32px 0 8px;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .contact-card .chip {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 14px;
+      background: color-mix(in srgb, var(--c-accent) 14%, transparent);
+      color: var(--c-accent);
+      border: 1px solid color-mix(in srgb, var(--c-accent) 25%, transparent);
+    }
+
+    .contact-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    /* ── DOC BODY ── */
+    .doc-body {
+      padding: 64px 0 96px;
+      max-width: 760px;
+    }
+
+    .section-label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin: 48px 0 20px;
+    }
+
+    .section-label:first-child { margin-top: 0; }
+
+    /* ── FAQ (native details/summary, no JS) ── */
+    .faq {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .faq details {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 22px;
+    }
+
+    .faq details[open] { border-color: var(--border-strong); }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15.5px;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .faq summary::-webkit-details-marker { display: none; }
+
+    .faq summary::after {
+      content: '+';
+      color: var(--faint);
+      font-size: 20px;
+      font-weight: 400;
+      flex: none;
+      transition: transform 0.2s ease;
+    }
+
+    .faq details[open] summary::after {
+      content: '\2212';
+    }
+
+    .faq p {
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.7;
+      margin-top: 12px;
+      max-width: 60ch;
+    }
+
+    .faq p strong { color: var(--text); font-weight: 600; }
+
+    /* ── COMMUNITY LINKS ── */
+    .links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* ── FOOTER (matches index.html) ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--faint);
+    }
+
+    .footer-inner strong { color: var(--muted); font-weight: 600; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--faint); }
+    .footer-links a:hover { color: var(--muted); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="img/forklift-icon.png" alt="TheForklift.dev" width="30" height="30" />
+        TheForklift<span style="color:var(--faint)">.dev</span>
+      </a>
+      <div class="nav-links">
+        <a href="pegperfect.html">PegPerfect</a>
+        <a href="pegperfect-support.html">Support</a>
+        <a href="pegperfect-privacy.html">Privacy</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="doc-hero wrap">
+    <p class="kicker">Help</p>
+    <h1>Support</h1>
+    <p class="doc-meta">Questions, bugs, and account help for <strong style="color:var(--text)">PegPerfect</strong>, published by TheForklift.dev LLC.</p>
+
+    <div class="contact-row">
+      <div class="contact-card">
+        <div class="chip">@</div>
+        <h3>Email us</h3>
+        <p>The fastest way to reach us. One person reads every message, so expect a reply within a few days rather than a bot.</p>
+        <a class="btn btn-ghost" href="mailto:support@theforklift.dev?subject=PegPerfect">support@theforklift.dev</a>
+      </div>
+      <div class="contact-card">
+        <div class="chip" style="background:color-mix(in srgb, var(--c-gold) 14%, transparent); color:var(--c-gold); border-color:color-mix(in srgb, var(--c-gold) 25%, transparent);">?</div>
+        <h3>Report a scoring issue</h3>
+        <p>Think a hand, crib, or pegging play was scored wrong? Send the cards, the starter, and what the app gave you.</p>
+        <a class="btn btn-ghost" href="mailto:support@theforklift.dev?subject=PegPerfect%20scoring%20issue">Report by email</a>
+      </div>
+      <div class="contact-card">
+        <div class="chip" style="background:color-mix(in srgb, var(--c-gold) 14%, transparent); color:var(--c-gold); border-color:color-mix(in srgb, var(--c-gold) 25%, transparent);">P</div>
+        <h3>Privacy and your data</h3>
+        <p>Read what PegPerfect collects, or delete your account and data.</p>
+        <a class="btn btn-ghost" href="pegperfect-privacy.html">Privacy policy</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap doc-body">
+    <p class="section-label">Frequently asked</p>
+    <div class="faq">
+      <details>
+        <summary>I bought PegPerfect Pro, but the app still shows it as locked</summary>
+        <p>Make sure you're signed in to the same Apple ID or Google account you bought it with, then look for <strong>Restore Purchases</strong> in Settings. If Pro still isn't showing, email <a href="mailto:support@theforklift.dev?subject=PegPerfect">support@theforklift.dev</a> with the Apple or Google account you purchased under, and we'll sort it out.</p>
+      </details>
+      <details>
+        <summary>Is Pro a subscription? How do I cancel?</summary>
+        <p>No. Pro is a <strong>one-time purchase</strong>, so there is nothing to cancel and nothing renews. Refunds are handled by Apple or Google Play, not by us. The purchase stays with your Apple ID or Google account, so you can restore it on a new device.</p>
+      </details>
+      <details>
+        <summary>I think the app scored a hand wrong</summary>
+        <p>Cribbage scoring has edge cases, and we want to hear about them. Email us the four cards in the hand, the starter card, whether it was a hand or a crib, and the score the app gave. A screenshot is even better. If the app is wrong, we'll fix it. If it's right, we'll show you where the points came from.</p>
+      </details>
+      <details>
+        <summary>My stats or streak disappeared</summary>
+        <p>Everything saves to your device first and syncs to the cloud when you're signed in and online. If you played as a guest and then signed in with Google or Apple, your progress is attached to that same profile. Switching to a different account starts from that account's own history. Individual match logs are kept for about 60 days, but career stats and streaks stay. Email us the rough dates and we can usually trace what happened.</p>
+      </details>
+      <details>
+        <summary>Can I play on more than one device?</summary>
+        <p>Yes. Sign in with the same Google or Apple account on each device and your stats and history sync. Guest play is tied to one device, since there's no sign-in to link them. Sign in once and your guest progress comes along.</p>
+      </details>
+      <details>
+        <summary>Does PegPerfect work offline?</summary>
+        <p>Yes. Every hand, drill, and streak is saved on your device the moment it happens and syncs later. The Daily Challenge leaderboard needs a connection and a signed-in account.</p>
+      </details>
+      <details>
+        <summary>Someone's leaderboard nickname is offensive</summary>
+        <p>You can report a nickname from the Daily Challenge leaderboard. If you can't, email <a href="mailto:support@theforklift.dev?subject=PegPerfect%20nickname%20report">support@theforklift.dev</a> with the nickname and the date, and we'll review it.</p>
+      </details>
+      <details>
+        <summary>How do I delete my account and data?</summary>
+        <p>Open <strong>Settings</strong>, then <strong>Account</strong>, then <strong>Delete account</strong>. It happens immediately. If you can't open the app, email <a href="mailto:privacy@theforklift.dev?subject=Delete%20account">privacy@theforklift.dev</a> instead. Full steps are on the <a href="pegperfect-delete-account.html">delete your account</a> page, and the <a href="pegperfect-privacy.html">privacy policy</a> explains what is deleted and what is kept.</p>
+      </details>
+      <details>
+        <summary>The app crashed or something won't load</summary>
+        <p>Email <a href="mailto:support@theforklift.dev?subject=PegPerfect">support@theforklift.dev</a> with your device model, OS version, and what you were doing when it happened. A screenshot of anything on screen helps a lot.</p>
+      </details>
+      <details>
+        <summary>Is PegPerfect safe for kids?</summary>
+        <p>PegPerfect isn't directed at children under 13, and we don't knowingly collect personal information from them. There are no ads and no ad tracking in the app.</p>
+      </details>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p><strong>TheForklift.dev LLC:</strong> apps built by one person.</p>
+      <div class="footer-links">
+        <a href="index.html">All apps</a>
+        <a href="pegperfect-support.html">Support</a>
+        <a href="pegperfect-privacy.html">Privacy</a>
+        <a href="pegperfect-delete-account.html">Delete account</a>
+      </div>
+      <p>&copy; 2026 TheForklift.dev</p>
+    </div>
+  </footer>
+
+</body>
+</html>
